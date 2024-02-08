@@ -1,4 +1,4 @@
-![image](./assets/images/LITrevu_banner.png)
+![image](./litrevu/static/images/LITrevu_banner.png)
 
 # LITRevu
 
@@ -38,4 +38,17 @@ python manage.py runserver
 ```
 
 le serveur de développement a démarré à l'adresse http://127.0.0.1:8000/
+ 
+---
+### Vérification du Code : 
+
+#### Procédure pour générer un rapport flake8 en HTML
+
+
+Dans le terminal dans le dossier du projet , tapez la commande suivante pour afficher la politique d'exécution actuelle :
+```
+flake8 --format=html --htmldir=rapports_flake8 --exclude=.venv-projet7
+```
+Le rapport sera sauvegardé dans le dossier rapports_flake8, il suffira de lancer le fichier index.html
+
 

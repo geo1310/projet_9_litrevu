@@ -1,0 +1,24 @@
+{% load static %}
+<html>
+    <head>
+        <title>LITReview</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    </head>
+    <body>
+        <div class="sidebar">
+            <h1>LITReview</h1>
+            {% if user.is_authenticated %}
+                <p>Salut, {{ user }} !</p>
+                <p><a href="{% url 'password_change' %}">Changer le mot de passe</a></p>
+                <!-- Logout form with POST-->
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <p><input type="submit" value="Se déconnecter"></p>
+                </form>
+            {% endif %}
+        </div>
+        <div class="main">
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>
