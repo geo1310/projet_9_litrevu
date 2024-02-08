@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Inscription</h2>
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {{ form.as_p }}
+    <div class="signup-page">
+        <h2>Inscription</h2>
+    <form method="post">
         {% csrf_token %}
-        <button type="submit" >S’inscrire</button>
-        <a href="{% url 'login' %}"><button type="button">Annuler</button></a>
+                {% for field in form %}
+                    <div class="form-field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="signup-error">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        <div class="connexion-button">
+            <button type="submit" class="login-button">S’inscrire</button>
+            <a href="{% url 'login' %}"><button type="button" class="login-button">Annuler</button></a>
+        </div>
+        
     </form>
+    </div>
 {% endblock content %}
