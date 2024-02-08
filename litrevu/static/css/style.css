@@ -1,0 +1,148 @@
+html {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/fond_ecran_livre_1.png);
+    opacity: 1;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    
+}
+
+body{
+    width: 80%;
+    background-color: white;
+    opacity: 0.85;
+
+}
+
+/* Header */
+
+.header {
+    background-color: #333;
+    color: white;
+    height: 100px;
+    padding: 30px;
+    opacity: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.titre-header{
+    display: flex;
+    align-items: center;
+}
+.nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+.nav a, .logout-button {
+    text-decoration: none;
+    background: none; 
+    border: none; 
+    color: white;
+    padding: 5px 5px;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+.logout-form{
+    margin: 0;
+}
+.nav a:hover, .logout-button:hover{
+    border-bottom: 2px solid #fff;
+    cursor: pointer;
+
+}
+.header img {
+    height: 100px;
+    margin-right: 20px;
+}
+
+/**/
+
+/* page login */
+
+.login-page{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    height: 100vh;
+    margin-top: 100px;
+
+}
+.connexion-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.inscription-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+/* page home */
+.home-page{
+    height: 100vh;
+}
+
+.form-field {
+    margin-bottom: 10px; /* Espacement entre les champs */
+}
+
+/* Style pour les labels dans les champs */
+label {
+    font-weight: 300;
+}
+
+/* Style pour placer les labels dans les champs */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: black;
+}
+.connexion-button{
+    width: 100%;
+    text-align: right;
+}
+.login-button{
+    padding: 10px 30px;
+    background-color: #333;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+}
+.login-button:hover{
+    cursor: pointer;
+    background-color: #c2791a;
+    color: black;
+    box-shadow: 0 0 50px #ffd193;
+}
+
+/* footer */
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background-color: #333; /* Couleur de fond du footer */
+    color: #fff; /* Couleur du texte du footer */
+    padding: 10px 0; /* Espacement intérieur du footer */
+}
+.logo-footer{
+    height: 80px;
+}
+
+

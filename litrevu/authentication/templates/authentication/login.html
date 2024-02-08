@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="form-connexion">
+    <div class="login-page">
         <div class="connexion-login">
             <h2>Connectez Vous</h2>
             <p>{{ message }}</p>
             <form method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit" >Se connecter</button>
-        </form>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="error">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="connexion-button">
+                    <button type="submit" class="login-button">Se connecter</button>
+                </div>
+                
+            </form>
         </div>
         <div class="inscription-login">
-            <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+            <h2>Inscrivez-vous maintenant </h2>
+            <a href="{% url 'signup' %}"><button type="button" class="login-button">S'inscrire</button></a>
         </div>
-        
-        
     </div>
-    
 {% endblock content %}

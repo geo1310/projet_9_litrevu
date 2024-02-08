@@ -2,23 +2,54 @@
 <html>
     <head>
         <title>LITReview</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
-        <div class="sidebar">
+        <header class="header">
+            <div class="titre-header">
+                <img
+                src="../static/images/lt_logo_white.png"
+                alt="logo litrevu header"
+                class="logo-litrevu-header"
+            ></img>
             <h1>LITReview</h1>
+            </div>
             {% if user.is_authenticated %}
-                <p>Salut, {{ user }} !</p>
-                <p><a href="{% url 'password_change' %}">Changer le mot de passe</a></p>
-                <!-- Logout form with POST-->
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <p><input type="submit" value="Se déconnecter"></p>
-                </form>
+                <div class="nav">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Flux
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Abonnements
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">
+                                    Se déconnecter
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             {% endif %}
-        </div>
+            
+        </header>
         <div class="main">
             {% block content %}{% endblock content %}
         </div>
+        <footer class="footer">
+            <img class="logo-footer" src="../static/images/lt_logo_white.png" alt="logo footer litreview">
+        </footer>
     </body>
 </html>
