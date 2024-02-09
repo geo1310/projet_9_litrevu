@@ -131,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "authentication.CustomUser"
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "flux"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # l’URL depuis laquelle Django va essayer de servir des médias. Dans certains cas, ce peut être une URL complète 

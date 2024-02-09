@@ -15,8 +15,7 @@ html {
 body{
     width: 80%;
     background-color: white;
-    opacity: 0.85;
-
+    opacity: 0.9;
 }
 
 /* Header */
@@ -100,8 +99,8 @@ body{
    
 }
 
-/* page home */
-.home-page{
+/* styles communs */
+.base-page{
     height: 100vh;
 }
 
@@ -122,6 +121,7 @@ input[type="password"] {
     font-size: 20px;
     margin-bottom: 20px;
     color: black;
+    opacity: 1;
 }
 .connexion-button{
     width: 100%;

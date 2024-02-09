@@ -40,7 +40,9 @@ urlpatterns = [
         ),
         name="password_change_done",
     ),
-    path("home/", bookreview.views.home, name="home"),
+    path("flux/", bookreview.views.flux, name="flux"),
+    path("follows/", bookreview.views.follows, name="follows"),
+    path("posts/", bookreview.views.posts, name="posts"),
 ]
 
 # les images stockées dans le répertoire MEDIA_ROOT seront servies au chemin donné par MEDIA_URL
