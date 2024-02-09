@@ -1,55 +1,51 @@
 {% load static %}
 <html>
-    <head>
-        <title>LITReview</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    </head>
-    <body>
-        <header class="header">
-            <div class="titre-header">
-                <img
-                src="../static/images/lt_logo_white.png"
-                alt="logo litrevu header"
-                class="logo-litrevu-header"
-            ></img>
+<head>
+    <title>LITReview</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="titre-header">
+            <img src="../static/images/lt_logo_white.png" alt="logo litrevu header" class="logo-litrevu-header"></img>
             <h1>LITReview</h1>
-            </div>
-            {% if user.is_authenticated %}
-                <div class="nav">
-                    <ul>
-                        <li>
-                            <a href="{% url 'flux' %}">
-                                Flux
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'posts' %}">
-                                Posts
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'follows' %}">
-                                Abonnements
-                            </a>
-                        </li>
-                        <li>
-                            <form action="{% url 'logout' %}" method="post" class="logout-form">
-                                {% csrf_token %}
-                                <button type="submit" class="logout-button">
-                                    Se déconnecter
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            {% endif %}
-            
-        </header>
-        <div class="main">
-            {% block content %}{% endblock content %}
         </div>
-        <footer class="footer">
-            <img class="logo-footer" src="../static/images/lt_logo_white.png" alt="logo footer litreview">
-        </footer>
-    </body>
+        {% if user.is_authenticated %}
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="{% url 'flux' %}">
+                        Flux
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'posts' %}">
+                        Posts
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'follows' %}">
+                        Abonnements
+                    </a>
+                </li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">
+                            Se déconnecter
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
+    </header>
+    <div class="main">
+        {% block content %}{% endblock content %}
+    </div>
+    <footer class="footer">
+        <img class="logo-footer" src="../static/images/lt_logo_white.png" alt="logo footer litreview">
+    </footer>
+</body>
 </html>
