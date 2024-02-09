@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="signup-page">
-        <h2>Inscription</h2>
+        <h2>Inscrivez-vous</h2>
     <form method="post">
         {% csrf_token %}
                 {% for field in form %}
@@ -14,8 +14,8 @@
                     </div>
                 {% endfor %}
         <div class="connexion-button">
+            <a href="{% url 'login' %}"><button type="button" class="login-button">Retourner</button></a>
             <button type="submit" class="login-button">S’inscrire</button>
-            <a href="{% url 'login' %}"><button type="button" class="login-button">Annuler</button></a>
         </div>
         
     </form>
