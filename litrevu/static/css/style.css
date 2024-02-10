@@ -25,7 +25,6 @@ body{
     color: white;
     height: 100px;
     padding: 30px;
-    opacity: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,7 +61,21 @@ body{
     margin-right: 20px;
 }
 
-/**/
+/* page follows */
+
+.follows-page{
+    margin-top: 100px;
+   text-align: center;
+}
+.follows-form{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+.follows-button{
+    margin-left: 50px;
+}
 
 /* page login */
 
@@ -103,6 +116,9 @@ body{
 .base-page{
     height: 100vh;
 }
+.base-page ul{
+    list-style: none;
+}
 
 .form-field {
     margin-bottom: 10px; /* Espacement entre les champs */
@@ -110,12 +126,13 @@ body{
 
 /* Style pour les labels dans les champs */
 label {
-    font-weight: 300;
+    font-weight: 500;
 }
 
 /* Style pour placer les labels dans les champs */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+select {
     width: 100%;
     padding: 10px;
     font-size: 20px;
@@ -123,11 +140,10 @@ input[type="password"] {
     color: black;
     opacity: 1;
 }
-.connexion-button{
-    width: 100%;
-    text-align: right;
+select{
+    padding: 10px 50px;
 }
-.login-button{
+.submit-button{
     padding: 10px 30px;
     background-color: #333;
     color: white;
@@ -135,7 +151,7 @@ input[type="password"] {
     border: none;
     border-radius: 10px;
 }
-.login-button:hover{
+.submit-button:hover{
     cursor: pointer;
     background-color: #c2791a;
     color: black;

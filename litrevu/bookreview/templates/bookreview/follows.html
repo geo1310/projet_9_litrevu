@@ -1,6 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="follows-page base-page">
-    <h1>Book Review - Follows page</h1>
+    <h2>Suivre d'autres utilisateurs</h2>
+    <div class="form-connexion">
+        <div>
+            <form method="post" class="follows-form">
+            {% csrf_token %}
+            {% for field in form %}
+                    <div class="form-field-follows">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="login-error">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="submit-button follows-button">Envoyer</button>  
+        </form>
+        </div>
+    </div>
+    <div class="followers">
+        <h2>Liste des abonnés : </h2>
+        <ul>
+            {% for follower in followers %}
+            <li>{{ follower.user }}</li>
+            {% endfor%}
+        </ul>
+    </div>
+    <div class="following">
+        <h2>Liste des abonnements : </h2>
+        <ul>
+            {% for following in followings %}
+            <li>{{ following.followed_user }}</li>
+            {% endfor%}
+        </ul>
+    </div>
 </div>
 {% endblock content %}
