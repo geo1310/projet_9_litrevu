@@ -4,7 +4,7 @@
     <h2>Créer un ticket</h2>
     <form method="post" class="ticket-form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for field in ticket_form %}
+    {% for field in ticket_form.visible_fields %}
             <div class="form-field-ticket">
                 {{ field.label_tag }}
                 {{ field }}

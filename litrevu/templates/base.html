@@ -3,15 +3,12 @@
     <head>
         <title>LITReview</title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/lt_logo.png' %}">
     </head>
     <body>
         <header class="header">
             <div class="titre-header">
-                <img
-                src="../static/images/lt_logo_white.png"
-                alt="logo litrevu header"
-                class="logo-litrevu-header"
-            ></img>
+                <img src="{% static 'images/lt_logo_white.png' %}" alt="logo header litrevu" class="logo-header-litrevu">
             <h1>LITReview</h1>
             </div>
             {% if user.is_authenticated %}
@@ -49,7 +46,7 @@
             {% block content %}{% endblock content %}
         </div>
         <footer class="footer">
-            <img class="logo-footer" src="../static/images/lt_logo_white.png" alt="logo footer litreview">
+            <img class="logo-footer" src="{% static 'images/lt_logo_white.png' %}" alt="logo footer litreview">
         </footer>
     </body>
 </html>

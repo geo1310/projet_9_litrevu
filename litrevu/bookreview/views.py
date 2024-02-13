@@ -5,8 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
 from django.db import IntegrityError
-from .models import UserFollows
-from .forms import UserFollowsForm, TicketForm
+from .models import UserFollows, Ticket
+from .forms import UserFollowsForm, TicketForm, DeleteTicketForm
 
 
 @login_required
@@ -21,20 +21,53 @@ def ticket_create(request):
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
-            print('sauvegarde du ticket')
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
 
             return redirect('flux')
         else:
+            print('erreur.................................')
             # Afficher les erreurs de validation du formulaire
-            messages.error(request, "Il y a des erreurs dans le formulaire.")
+            for field, errors in ticket_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Erreur dans le champ '{field}': {error}")
+                print(messages)
     context = {
         'ticket_form': ticket_form,
     }
 
     return render(request, 'bookreview/ticket.html', context=context)
+
+
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    edit_form = TicketForm(instance=ticket)
+    delete_form = DeleteTicketForm()
+    if request.method == 'POST':
+        if 'edit_ticket' in request.POST:
+            edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
+            if edit_form.is_valid():
+                edit_form.save()
+
+                return redirect('flux')
+            else:
+                # Afficher les erreurs de validation du formulaire
+                for field, errors in edit_form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"Erreur dans le champ '{field}': {error}")
+
+        if 'delete_ticket' in request.POST:
+            delete_form = DeleteTicketForm(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('flux')
+    context = {
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+    }
+    return render(request, 'bookreview/edit_ticket.html', context=context)
 
 
 @login_required
@@ -53,7 +86,7 @@ def follows(request):
             except IntegrityError:
                 messages.error(request, f"L'utilisateur {user_follow.followed_user} est deja dans votre liste de suivis")
                 return render(request, 'bookreview/follows.html', {'form': form, 'followings': followings, 'followers': followers})
-            
+
             return redirect('follows')
     else:
         form = UserFollowsForm()

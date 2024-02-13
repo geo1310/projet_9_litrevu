@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="ticket-page base-page">
+    <h2 class="ticket-h2">Modifier votre ticket</h2>
+    <form method="post" class="ticket-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in edit_form %}
+            {% if field.name == 'image' %}
+                <div class="form-field-ticket">
+                    {{ field.label_tag }}
+                    <br>
+                    <img src="{{ field.value.url }}" alt="{{ field.value }}" class="ticket-img">
+                    <br>
+                    <input type="file" name="{{ field.name }}" accept="image/*">
+                </div>
+            {% elif field.name == 'edit_ticket' %}
+                {{ field }}
+            {% else %}
+                <div class="form-field-ticket">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="submit-button ticket-button">Envoyer</button>  
+    </form>
+    
+    <div class="ticket-delete">
+        <h2>Supprimer votre ticket</h2>
+        <form method="post" class="ticket-form-delete">
+            {{ delete_form }}
+            {% csrf_token %}
+            <button type="submit" class="submit-button ticket-button">Supprimer</button>
+        </form>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock content %}
