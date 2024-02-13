@@ -10,6 +10,7 @@ html {
 html, h1, h2{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
     width: 80%;
@@ -119,10 +120,10 @@ body{
    
 }
 
-.form-field {
-    margin-bottom: 10px; /* Espacement entre les champs */
+.form-field, .form-field-ticket {
+    margin-bottom: 20px; /* Espacement entre les champs */
 }
-input:focus, select:focus{
+input:focus, select:focus, textarea:focus{
     background-color: #f0c997;
     border:none ;
 }
@@ -168,6 +169,7 @@ select{
     box-shadow: 0 0 50px #ffd193;
 }
 /* page follows */
+
 .follows-form-title{
     text-align: center;
 }
@@ -219,6 +221,25 @@ select{
     border: 2px solid #c2791a;
     background-color: #c2791a;
     box-shadow: 0 0 50px #ffd193;
+}
+
+/* page ticket */
+.ticket-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.form-field-ticket input[type="text"],
+.form-field-ticket input[type="file"],
+.form-field-ticket input[type="password"],
+.form-field-ticket textarea {
+    width: 100%; /* Définir la largeur de tous les champs de texte à 100% */
+    padding: 10px; /* Ajouter un remplissage pour un meilleur aspect */
+    border: 1px solid #ccc; /* Ajouter une bordure */
+    border-radius: 5px; /* Ajouter une bordure arrondie */
+    box-sizing: border-box; /* Inclure le remplissage et la bordure dans la largeur totale */
 }
 
 

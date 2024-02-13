@@ -5,10 +5,10 @@ from django.db import models
 
 class Ticket(models.Model):
     # Your Ticket model definition goes here
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, verbose_name="Titre")
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(verbose_name='ticket image')
+    image = models.ImageField(verbose_name='Image')
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -6,12 +6,35 @@ from django.contrib import messages
 
 from django.db import IntegrityError
 from .models import UserFollows
-from .forms import UserFollowsForm
+from .forms import UserFollowsForm, TicketForm
 
 
 @login_required
 def posts(request):
+
     return render(request, 'bookreview/posts.html')
+
+
+@login_required
+def ticket_create(request):
+    ticket_form = TicketForm()
+    if request.method == 'POST':
+        ticket_form = TicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid():
+            print('sauvegarde du ticket')
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+
+            return redirect('flux')
+        else:
+            # Afficher les erreurs de validation du formulaire
+            messages.error(request, "Il y a des erreurs dans le formulaire.")
+    context = {
+        'ticket_form': ticket_form,
+    }
+
+    return render(request, 'bookreview/ticket.html', context=context)
 
 
 @login_required
@@ -30,6 +53,7 @@ def follows(request):
             except IntegrityError:
                 messages.error(request, f"L'utilisateur {user_follow.followed_user} est deja dans votre liste de suivis")
                 return render(request, 'bookreview/follows.html', {'form': form, 'followings': followings, 'followers': followers})
+            
             return redirect('follows')
     else:
         form = UserFollowsForm()
@@ -39,6 +63,7 @@ def follows(request):
         'followings': followings,
         'followers': followers,
     }
+
     return render(request, 'bookreview/follows.html', context=context)
 
 
@@ -47,6 +72,7 @@ def follows_delete(request, follows_id):
     # Vérifier que l'utilisateur est autorisé à supprimer l'objet
     follow = get_object_or_404(UserFollows, id=follows_id)
     if follow.user != request.user:
+
         return HttpResponseForbidden("Vous n'êtes pas autorisé à effectuer cette action.")
 
     try:
@@ -64,4 +90,5 @@ def follows_delete(request, follows_id):
 
 @login_required
 def flux(request):
+    
     return render(request, 'bookreview/flux.html')

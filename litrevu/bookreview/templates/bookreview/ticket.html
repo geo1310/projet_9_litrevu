@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="ticket-page base-page">
+    <h2>Créer un ticket</h2>
+    <form method="post" class="ticket-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in ticket_form %}
+            <div class="form-field-ticket">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="submit-button ticket-button">Envoyer</button>  
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock content %}
