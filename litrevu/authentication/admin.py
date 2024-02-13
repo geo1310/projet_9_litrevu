@@ -8,6 +8,7 @@ class CustomUserAdmin(UserAdmin):
         "username",
         "is_active",
         "is_staff",
+        "id",
     )
     search_fields = (
         "username",

@@ -43,6 +43,7 @@ urlpatterns = [
     path("flux/", bookreview.views.flux, name="flux"),
     path("follows/", bookreview.views.follows, name="follows"),
     path("posts/", bookreview.views.posts, name="posts"),
+    path('follows/<int:follows_id>/delete', bookreview.views.follows_delete, name='follows_delete'),
 ]
 
 # les images stockées dans le répertoire MEDIA_ROOT seront servies au chemin donné par MEDIA_URL

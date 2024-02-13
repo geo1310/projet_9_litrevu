@@ -1,39 +1,66 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="follows-page base-page">
-    <h2>Suivre d'autres utilisateurs</h2>
-    <div class="form-connexion">
+    <div class="follows-form-title">
+        <h2>Suivre d'autres utilisateurs</h2>
         <div>
             <form method="post" class="follows-form">
             {% csrf_token %}
             {% for field in form %}
                     <div class="form-field-follows">
-                        {{ field.label_tag }}
                         {{ field }}
-                        {% if field.errors %}
-                            <p class="login-error">{{ field.errors }}</p>
-                        {% endif %}
                     </div>
                 {% endfor %}
                 <button type="submit" class="submit-button follows-button">Envoyer</button>  
         </form>
         </div>
-    </div>
-    <div class="followers">
-        <h2>Liste des abonnés : </h2>
-        <ul>
-            {% for follower in followers %}
-            <li>{{ follower.user }}</li>
-            {% endfor%}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
         </ul>
+        {% endif %}
     </div>
-    <div class="following">
-        <h2>Liste des abonnements : </h2>
-        <ul>
-            {% for following in followings %}
-            <li>{{ following.followed_user }}</li>
-            {% endfor%}
-        </ul>
-    </div>
+    {% if followings %}
+        <div class="following">
+            <h2>Abonnements : </h2>
+            <table class="follows-table">
+                <thead>
+                </thead>
+                <tbody>
+                    {% for following in followings %}
+                    <tr class="follows-tr">
+                        <td class="follows-td-name">{{ following.followed_user }}</td>
+                        <td>
+                        <a href="{% url 'follows_delete' following.id %}">
+                            <span class="follows-td-button">
+                                Désabonner
+                            </span>
+                        </a>
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    {% if followers %}
+        <div class="followers">
+            <h2>Abonnés : </h2>
+            <table class="follows-table">
+                <thead>
+                </thead>
+                <tbody>
+                    {% for follower in followers %}
+                    <tr class="follows-tr">
+                        <td class="follows-td-name">{{ follower.user }}</td>
+                    </tr>
+                        {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 </div>
 {% endblock content %}

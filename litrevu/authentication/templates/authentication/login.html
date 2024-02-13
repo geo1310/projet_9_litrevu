@@ -10,15 +10,11 @@
                     <div class="form-field">
                         {{ field.label_tag }}
                         {{ field }}
-                        {% if field.errors %}
-                            <p class="login-error">{{ field.errors }}</p>
-                        {% endif %}
                     </div>
                 {% endfor %}
                 <div class="connexion-button">
                     <button type="submit" class="submit-button">Se connecter</button>
                 </div>
-                
             </form>
         </div>
         <div class="inscription-login">
@@ -26,4 +22,9 @@
             <a href="{% url 'signup' %}"><button type="button" class="submit-button">S'inscrire</button></a>
         </div>
     </div>
+    {% if form.non_field_errors %}
+                <div class="login-error" role="alert">
+                    {{ form.non_field_errors.as_text }}
+                </div>
+        {% endif %}
 {% endblock content %}

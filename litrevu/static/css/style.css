@@ -1,22 +1,44 @@
 html {
     font-family: Arial;
-    margin: 0;
-    padding: 0;
     background-image: url(../images/fond_ecran_livre_1.png);
-    opacity: 1;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
-    
 }
-
+html, h1, h2{
+    margin: 0;
+    padding: 0;
+}
 body{
     width: 80%;
+    
+}
+.main{  
     background-color: white;
     opacity: 0.9;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
+
+/* affichage des messages de succes et d erreurs */
+
+.messages{
+    list-style: none;
+    margin-bottom: 50px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.messages li.success {
+    color: green;
+}
+
+.messages li.error {
+    color: red;
+}
+
 
 /* Header */
 
@@ -61,21 +83,6 @@ body{
     margin-right: 20px;
 }
 
-/* page follows */
-
-.follows-page{
-    margin-top: 100px;
-   text-align: center;
-}
-.follows-form{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-}
-.follows-button{
-    margin-left: 50px;
-}
 
 /* page login */
 
@@ -83,27 +90,27 @@ body{
     display: flex;
     justify-content: space-evenly;
     flex-direction: row-reverse;
-    height: 100vh;
-    margin-top: 100px;
-
 }
 .signup-page{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    margin-top: 100px;
 }
 .errorlist{
     color: red;
     list-style: none;
     margin: 30px 0;
 }
+
 .connexion-login{
     display: flex;
     flex-direction: column;
     align-items: center;
     
+}
+.connexion-button{
+    text-align: end;
+    margin-top: 40px;
 }
 .inscription-login {
     display: flex;
@@ -112,16 +119,19 @@ body{
    
 }
 
-/* styles communs */
-.base-page{
-    height: 100vh;
-}
-.base-page ul{
-    list-style: none;
-}
-
 .form-field {
     margin-bottom: 10px; /* Espacement entre les champs */
+}
+input:focus, select:focus{
+    background-color: #f0c997;
+    border:none ;
+}
+
+.login-error{
+    margin-top: 30px;
+    font-size: 20px;
+    text-align: center;
+    color: red;
 }
 
 /* Style pour les labels dans les champs */
@@ -136,15 +146,15 @@ select {
     width: 100%;
     padding: 10px;
     font-size: 20px;
-    margin-bottom: 20px;
     color: black;
-    opacity: 1;
+    
 }
 select{
     padding: 10px 50px;
 }
 .submit-button{
     padding: 10px 30px;
+    margin-top: 30px;
     background-color: #333;
     color: white;
     font-size: 18px;
@@ -157,10 +167,65 @@ select{
     color: black;
     box-shadow: 0 0 50px #ffd193;
 }
+/* page follows */
+.follows-form-title{
+    text-align: center;
+}
+.follows-form{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.follows-button{
+    margin-left: 50px;
+    margin-top: 0;
+}
+.follows-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.following, .followers{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.follows-td-name{
+    width: 45vw;
+    padding: 10px;
+    border: 1px solid black;
+}
+.follows-td-button a{
+    text-decoration: none;
+}
+.follows-td-button{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: black;
+    text-align: center;
+}
+.follows-td-button:hover{
+    cursor: pointer;
+    border: 2px solid #c2791a;
+    background-color: #c2791a;
+    box-shadow: 0 0 50px #ffd193;
+}
+
 
 /* footer */
 
 .footer {
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;

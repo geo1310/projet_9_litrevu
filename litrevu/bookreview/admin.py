@@ -11,7 +11,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 class UserFollowsAdmin(admin.ModelAdmin):
-    list_display = ('user', 'followed_user')
+    list_display = ('user', 'followed_user', 'id')
 
 
 admin.site.register(Ticket, TicketAdmin)
