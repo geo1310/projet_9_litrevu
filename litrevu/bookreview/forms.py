@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserFollows, Ticket
+from .models import UserFollows, Ticket, Review
 
 
 class UserFollowsForm(forms.ModelForm):
@@ -20,3 +20,15 @@ class TicketForm(forms.ModelForm):
 class DeleteTicketForm(forms.Form):
     # champ caché
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True, required=False)
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ['headline', 'rating', 'body']
+        '''
+        widgets = {
+            'rating': forms.RadioSelect(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]),
+        }
+        '''

@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
+
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 from django.db import IntegrityError
 from .models import UserFollows, Ticket
-from .forms import UserFollowsForm, TicketForm, DeleteTicketForm
+from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
 
 @login_required
@@ -16,7 +18,7 @@ def posts(request):
 
 
 @login_required
-def ticket_create(request):
+def create_ticket(request):
     ticket_form = TicketForm()
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST, request.FILES)
@@ -27,17 +29,16 @@ def ticket_create(request):
 
             return redirect('flux')
         else:
-            print('erreur.................................')
             # Afficher les erreurs de validation du formulaire
             for field, errors in ticket_form.errors.items():
                 for error in errors:
                     messages.error(request, f"Erreur dans le champ '{field}': {error}")
-                print(messages)
+
     context = {
         'ticket_form': ticket_form,
     }
 
-    return render(request, 'bookreview/ticket.html', context=context)
+    return render(request, 'bookreview/create_ticket.html', context=context)
 
 
 @login_required
@@ -68,6 +69,25 @@ def edit_ticket(request, ticket_id):
         'delete_form': delete_form,
     }
     return render(request, 'bookreview/edit_ticket.html', context=context)
+
+
+@login_required
+def create_review(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    review_form = ReviewForm()
+    if request.method == 'POST':
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            return redirect('flux')
+
+    context = {
+        'ticket': ticket,
+        'review_form': review_form,
+    }
+    return render(request, 'bookreview/create_review.html', context=context)
 
 
 @login_required

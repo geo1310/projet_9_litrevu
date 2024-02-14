@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="review-page base-page">
+    <h2>Créer une critique</h2>
+    <div class="review-texte">Vous êtes en train de poster en réponse à</div>
+    <div class="ticket-display">
+        <div class="ticket-display-title">
+            <p>{{ ticket.user }} a demandé une critique.</p>
+            <p>{{ ticket.time_created}}</p>
+        </div>
+        <h3>{{ ticket.title }}</h3>
+        <p>{{ ticket.description }}</p>
+        <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="ticket-img">
+        <br>
+    </div>
+    <form method="post" class="review-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in review_form.visible_fields %}
+            <div class="form-field-ticket">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <div class="button-submit-right">
+            <button type="submit" class="submit-button review-button">Envoyer</button>
+        </div>
+          
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock content %}
