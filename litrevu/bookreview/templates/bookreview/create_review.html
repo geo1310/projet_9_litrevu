@@ -13,7 +13,7 @@
         <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="ticket-img">
         <br>
     </div>
-    <form method="post" class="review-form" enctype="multipart/form-data">
+    <form method="post" class="review-form">
     {% csrf_token %}
     {% for field in review_form.visible_fields %}
             <div class="form-field-ticket">

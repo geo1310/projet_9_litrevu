@@ -76,12 +76,18 @@ def create_review(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     review_form = ReviewForm()
     if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
             review.ticket = ticket
             review.save()
             return redirect('flux')
+        else:
+            # Afficher les erreurs de validation du formulaire
+            for field, errors in review_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Erreur dans le champ '{field}': {error}")
 
     context = {
         'ticket': ticket,
