@@ -6,7 +6,7 @@ from django.contrib import messages
 
 from django.db import IntegrityError
 from .models import UserFollows, Ticket, Review
-from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm, DeleteReviewForm
+from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
 
 # Ticket
@@ -111,7 +111,6 @@ def edit_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     edit_form = ReviewForm(instance=review)
     ticket = review.ticket
-    delete_form = DeleteReviewForm()
     if request.method == 'POST':
         edit_form = ReviewForm(request.POST, instance=review)
         if edit_form.is_valid():
@@ -126,7 +125,6 @@ def edit_review(request, review_id):
 
     context = {
         'edit_form': edit_form,
-        'delete_form': delete_form,
         'ticket': ticket,
     }
     return render(request, 'bookreview/edit_review.html', context=context)
