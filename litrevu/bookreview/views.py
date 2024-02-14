@@ -2,23 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
-
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 
 from django.db import IntegrityError
-from .models import UserFollows, Ticket
-from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
+from .models import UserFollows, Ticket, Review
+from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm, DeleteReviewForm
 
 
-@login_required
-def posts(request):
-
-    return render(request, 'bookreview/posts.html')
+# Ticket
 
 
 @login_required
 def create_ticket(request):
+
+    ''' Création d'un Ticket '''
+
     ticket_form = TicketForm()
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST, request.FILES)
@@ -43,6 +41,9 @@ def create_ticket(request):
 
 @login_required
 def edit_ticket(request, ticket_id):
+
+    ''' Edition d'un Ticket '''
+
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
     delete_form = DeleteTicketForm()
@@ -71,8 +72,14 @@ def edit_ticket(request, ticket_id):
     return render(request, 'bookreview/edit_ticket.html', context=context)
 
 
+# Review
+
+
 @login_required
 def create_review(request, ticket_id):
+
+    ''' Creation d'une Critique '''
+
     ticket = get_object_or_404(Ticket, id=ticket_id)
     review_form = ReviewForm()
     if request.method == 'POST':
@@ -97,7 +104,42 @@ def create_review(request, ticket_id):
 
 
 @login_required
+def edit_review(request, review_id):
+
+    ''' Edition d'une Critique '''
+
+    review = get_object_or_404(Review, id=review_id)
+    edit_form = ReviewForm(instance=review)
+    ticket = review.ticket
+    delete_form = DeleteReviewForm()
+    if request.method == 'POST':
+        edit_form = ReviewForm(request.POST, instance=review)
+        if edit_form.is_valid():
+            edit_form.save()
+
+            return redirect('flux')
+        else:
+            # Afficher les erreurs de validation du formulaire
+            for field, errors in edit_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Erreur dans le champ '{field}': {error}")
+
+    context = {
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+        'ticket': ticket,
+    }
+    return render(request, 'bookreview/edit_review.html', context=context)
+
+
+# Follow users
+
+
+@login_required
 def follows(request):
+
+    '''Abonnements et abonés d'un utilisateur'''
+
     # Récupérer les utilisateurs suivis et les abonnés de l'utilisateur connecté
     followings = UserFollows.objects.filter(user=request.user)
     followers = UserFollows.objects.filter(followed_user=request.user)
@@ -128,8 +170,12 @@ def follows(request):
 
 @login_required
 def follows_delete(request, follows_id):
-    # Vérifier que l'utilisateur est autorisé à supprimer l'objet
+
+    ''' Suppression des abonnements d'un utilisateur '''
+    
     follow = get_object_or_404(UserFollows, id=follows_id)
+
+    # Vérifie que l'utilisateur est autorisé à supprimer l'objet
     if follow.user != request.user:
 
         return HttpResponseForbidden("Vous n'êtes pas autorisé à effectuer cette action.")
@@ -147,7 +193,19 @@ def follows_delete(request, follows_id):
     return redirect('follows')
 
 
+# Posts
+
+
+@login_required
+def posts(request):
+
+    return render(request, 'bookreview/posts.html')
+
+
+# Flux
+
+
 @login_required
 def flux(request):
-    
+
     return render(request, 'bookreview/flux.html')

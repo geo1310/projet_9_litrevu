@@ -47,6 +47,7 @@ urlpatterns = [
     path('ticket/create', bookreview.views.create_ticket, name='create_ticket'),
     path('ticket/<int:ticket_id>/edit', bookreview.views.edit_ticket, name='edit_ticket'),
     path('review/<int:ticket_id>/create', bookreview.views.create_review, name='create_review'),
+    path('review/<int:review_id>/edit', bookreview.views.edit_review, name='edit_review'),
 ]
 
 # les images stockées dans le répertoire MEDIA_ROOT seront servies au chemin donné par MEDIA_URL

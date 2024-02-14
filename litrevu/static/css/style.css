@@ -290,6 +290,11 @@ select{
     width: 100%;
     text-align: right;
 }
+#id_rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
 /* footer */
 
