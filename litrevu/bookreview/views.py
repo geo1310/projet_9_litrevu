@@ -233,8 +233,16 @@ def follows_delete(request, follows_id):
 
 @login_required
 def posts(request):
+    tickets = Ticket.objects.filter(user=request.user)
+    reviews = Review.objects.filter(user=request.user)
 
-    return render(request, "bookreview/posts.html")
+    posts = list(tickets) + list(reviews)
+    print(posts)
+
+    # Trier les posts par ordre antéchronologique
+    posts.sort(key=lambda x: x.time_created, reverse=True)
+
+    return render(request, "bookreview/posts.html", {"posts": posts})
 
 
 # Flux

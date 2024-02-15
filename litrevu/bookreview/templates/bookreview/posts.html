@@ -1,6 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="posts-page base-page">
-    <h2>Book Review - Posts page</h2>
+    <h2>Vos posts</h2>
+    <ul>
+        {% for post in posts %}
+            <li>
+                {% if post.ticket %}
+                    <p>Vous avez publié une critique</p>
+                    <strong>Date de création:</strong> {{ post.time_created }}<br>
+                    <strong>Ticket:</strong> {{ post.headline }}<br>
+                    <strong>Description:</strong> {{ post.body }}<br>  
+                {% else %}
+                    <p>Vous avez publié un ticket</p>
+                    <strong>Date de création:</strong> {{ post.time_created }}<br>
+                    <strong>Ticket:</strong> {{ post.title }}<br>
+                    <strong>Description:</strong> {{ post.description }}<br>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock content %}

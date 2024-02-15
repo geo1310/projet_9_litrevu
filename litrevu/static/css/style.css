@@ -241,7 +241,7 @@ select{
 
 /* page ticket */
 
-.ticket-page, .review-page{
+.ticket-page, .review-page, .posts-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
