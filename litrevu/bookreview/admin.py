@@ -3,15 +3,15 @@ from bookreview.models import Ticket, Review, UserFollows
 
 
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'time_created', 'id')
+    list_display = ("title", "user", "time_created", "id")
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('headline', 'ticket', 'rating', 'user', 'time_created')
+    list_display = ("headline", "ticket", "rating", "user", "time_created", "id")
 
 
 class UserFollowsAdmin(admin.ModelAdmin):
-    list_display = ('user', 'followed_user', 'id')
+    list_display = ("user", "followed_user", "id")
 
 
 admin.site.register(Ticket, TicketAdmin)

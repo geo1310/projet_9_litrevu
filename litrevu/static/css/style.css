@@ -1,5 +1,5 @@
 html {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background-image: url(../images/fond_ecran_livre_1.png);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -14,13 +14,23 @@ html, h1, h2{
 }
 body{
     width: 80%;
+    opacity: 0.9;
     
 }
 .main{  
     background-color: white;
-    opacity: 0.95;
     padding-top: 100px;
     padding-bottom: 100px;
+}
+.text-left{
+    width: 100%;
+    text-align: left;
+    font-weight: 600;
+    margin-top: 50px;
+}
+.button-submit-right{
+    width: 100%;
+    text-align: right;
 }
 
 /* affichage des messages de succes et d erreurs */
@@ -286,10 +296,7 @@ select{
     width: 80%;
     margin-top: 20px;
 }
-.button-submit-right{
-    width: 100%;
-    text-align: right;
-}
+
 #id_rating{
     display: flex;
     flex-direction: row;
