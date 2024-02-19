@@ -6,15 +6,25 @@
         {% for post in posts %}
             <li>
                 {% if post.ticket %}
-                    <p>Vous avez publié une critique</p>
-                    <strong>Date de création:</strong> {{ post.time_created }}<br>
-                    <strong>Ticket:</strong> {{ post.headline }}<br>
-                    <strong>Description:</strong> {{ post.body }}<br>  
+                    <div class="review">
+                        <p>Vous avez publié une critique - {{ post.time_created }}</p>
+                        <p>{{ post.headline }} - {{ post.rating }}</p>
+                        <p>{{ post.body }}</p>
+                        <div class="ticket-review">
+                            <p>Ticket - {{ post.ticket.user }}</p>
+                            <p>{{ post.ticket.title }}</p>
+                            <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
+                        </div>
+                    </div>
+                      
                 {% else %}
-                    <p>Vous avez publié un ticket</p>
-                    <strong>Date de création:</strong> {{ post.time_created }}<br>
-                    <strong>Ticket:</strong> {{ post.title }}<br>
-                    <strong>Description:</strong> {{ post.description }}<br>
+                    <div clas="ticket">
+                        <p>Vous avez publié un ticket - {{ post.time_created }}</p>
+                        <p>{{ post.title }}</p>
+                        <p>{{ post.description }}</p>
+                        <img src="{{ post.image.url }}" alt="{{post.title}}">
+                    </div>
+
                 {% endif %}
             </li>
         {% endfor %}

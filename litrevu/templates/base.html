@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LITReview</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/lt_logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logos/lt_logo_white.png' %}">
 </head>
 <body>
     <header class="header">
         <div class="titre-header">
-            <img src="{% static 'images/lt_logo_white.png' %}" alt="logo header litrevu" class="logo-header-litrevu">
-        <h1>LITReview</h1>
+            <img src="{% static 'logos/lt_logo_white.png' %}" alt="logo header litrevu" class="logo-header-litrevu">
+        <div>
+            <h1>LITReview</h1>
+            {% if user.is_authenticated %}
+            <span>bienvenue {{ request.user }}</span>
+            {% endif %}
+        </div>
         </div>
         {% if user.is_authenticated %}
             <div class="nav">
@@ -49,7 +54,7 @@
         {% block content %}{% endblock content %}
     </div>
     <footer class="footer">
-        <img class="logo-footer" src="{% static 'images/lt_logo_white.png' %}" alt="logo footer litreview">
+        <img class="logo-footer" src="{% static 'logos/lt_logo_white.png' %}" alt="logo footer litreview">
     </footer>
 </body>
 </html>

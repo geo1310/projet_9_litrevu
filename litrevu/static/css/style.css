@@ -1,36 +1,67 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    
+}
+
 html {
-    font-family: Arial, sans-serif;
-    background-image: url(../images/fond_ecran_livre_1.png);
+    
+    background-image: url(../images/man_made-book-library-841345.jpeg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
 }
-html, h1, h2{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 body{
     width: 80%;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-family: Verdana, sans-serif; 
+    font-size: 100%;
     
 }
 .main{  
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     background-color: white;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    
 }
 .text-left{
     width: 100%;
     text-align: left;
+    font-size: 18px;
     font-weight: 600;
     margin-top: 50px;
 }
 .button-submit-right{
     width: 100%;
     text-align: right;
+}
+.span-bottom{
+    margin-bottom: 20px;
+}
+.base-page{
+    width: 100%;
+}
+
+.base-page h2 {
+    color: #333;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(4, 81, 104, 0.5);
+}
+.base-page h3{
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
+}
+img{
+    max-width: 200px;
+    border-radius: 10px;
 }
 
 /* affichage des messages de succes et d erreurs */
@@ -54,7 +85,7 @@ body{
 /* Header */
 
 .header {
-    background-color: #333;
+    background-color: #478ac9;
     color: white;
     height: 100px;
     padding: 30px;
@@ -65,6 +96,9 @@ body{
 .titre-header{
     display: flex;
     align-items: center;
+}
+.titre-header h1{
+    margin: 0;
 }
 .nav ul {
     display: flex;
@@ -85,7 +119,7 @@ body{
     margin: 0;
 }
 .nav a:hover, .logout-button:hover{
-    border-bottom: 2px solid #fff;
+    border-bottom: 4px solid #fff;
     cursor: pointer;
 
 }
@@ -98,11 +132,16 @@ body{
 /* page login */
 
 .login-page{
+    width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row-reverse;
 }
+
 .signup-page{
+    width: 90%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,6 +150,7 @@ body{
     color: red;
     list-style: none;
     margin: 30px 0;
+    font-size: 20px;
 }
 
 .connexion-login{
@@ -130,26 +170,26 @@ body{
    
 }
 .change-password{
-    
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .form-field, .form-field-ticket {
     margin-bottom: 20px; /* Espacement entre les champs */
 }
-input:focus, select:focus, textarea:focus{
-    background-color: #f0c997;
-    border:none ;
+input:focus, select:focus, textarea:focus, #id_followed_user:focus{
+    background-color: #77aad9;
+    color: white;
+    border-width: 0;
+    
 }
-
 .login-error{
     margin-top: 30px;
     font-size: 20px;
     text-align: center;
     color: red;
 }
+
 
 /* Style pour les labels dans les champs */
 label {
@@ -160,19 +200,23 @@ label {
 input[type="text"],
 input[type="password"],
 select {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     font-size: 20px;
-    color: black;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px lightgrey;
+    border: 1px solid lightgrey;
+    
     
 }
 select{
     padding: 10px 50px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
 }
 .submit-button{
     padding: 10px 30px;
-    margin-top: 30px;
-    background-color: #333;
+    background-color: #77aad9;
     color: white;
     font-size: 18px;
     border: none;
@@ -180,15 +224,12 @@ select{
 }
 .submit-button:hover{
     cursor: pointer;
-    background-color: #c2791a;
+    background-color: #e0cdb4;
     color: black;
-    box-shadow: 0 0 50px #ffd193;
+    box-shadow: 0 0 50px #dfaf70;
 }
 /* page follows */
 
-.follows-form-title{
-    text-align: center;
-}
 .follows-form{
     display: flex;
     flex-direction: row;
@@ -197,11 +238,33 @@ select{
     margin-top: 50px;
     margin-bottom: 50px;
 }
+#id_followed_user{
+    margin-right: 50px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+    box-shadow: 5px 5px 20px lightgrey;
+}
+.form-field-follows{
+    margin-right: 30px;
+}
 .follows-button{
     margin-left: 50px;
-    margin-top: 0;
+    text-decoration: none;
+    background-color: #77aad9;
+    height: 100%;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+.follows-button:hover{
+    cursor: pointer;
+    background-color: #e0cdb4;
+    color: black;
+    box-shadow: 0 0 50px #dfaf70;
 }
 .follows-page{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -209,35 +272,27 @@ select{
 }
 
 .following, .followers{
-    text-align: center;
+    width: 90%;
+    padding: 20px;
     margin-bottom: 50px;
+    border-radius: 10px;
+    border: 2px solid lightgrey;
+    box-shadow: 8px 8px 30px lightgrey;
+}
+.follows-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    box-shadow: 5px 5px 20px lightgrey;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
-.follows-td-name{
-    width: 45vw;
-    padding: 10px;
-    border: 1px solid black;
-}
-.follows-td-button a{
-    text-decoration: none;
-}
-.follows-td-button{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: black;
-    text-align: center;
-}
-.follows-td-button:hover{
-    cursor: pointer;
-    border: 2px solid #c2791a;
-    background-color: #c2791a;
-    box-shadow: 0 0 50px #ffd193;
-}
+
+
 
 /* page ticket */
 
@@ -252,11 +307,12 @@ select{
 .form-field-ticket input[type="file"],
 .form-field-ticket input[type="password"],
 .form-field-ticket textarea {
-    width: 100%; /* Définir la largeur de tous les champs de texte à 100% */
-    padding: 10px; /* Ajouter un remplissage pour un meilleur aspect */
-    border: 1px solid #ccc; /* Ajouter une bordure */
-    border-radius: 5px; /* Ajouter une bordure arrondie */
-    box-sizing: border-box; /* Inclure le remplissage et la bordure dans la largeur totale */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px lightgrey;
+    border-width: 0;
 }
 .form-field-ticket textarea{
     font-size: 20px;
@@ -270,17 +326,18 @@ select{
     align-items: center;
     margin: 50px 0; 
 }
-.ticket-h2{
-    margin-bottom: 30px;
-}
+
 .ticket-img{
     margin: 30px 0;
 }
 
 /* page review */
+
 .ticket-display{
     width: 60%;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px lightgray;
     padding: 20px;
     margin: 30px 0;
 }
@@ -302,6 +359,13 @@ select{
     flex-direction: row;
     justify-content: space-evenly;
 }
+.ticket-section, .review-section{
+    padding: 0 20px 20px 20px;
+    margin-bottom: 30px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px lightgray;
+}
 
 /* footer */
 
@@ -311,9 +375,9 @@ select{
     align-items: center;
     justify-content: center;
     height: 100px;
-    background-color: #333; /* Couleur de fond du footer */
-    color: #fff; /* Couleur du texte du footer */
-    padding: 10px 0; /* Espacement intérieur du footer */
+    background-color: #478ac9;
+    color: #fff; 
+    padding: 10px 0;
 }
 .logo-footer{
     height: 80px;

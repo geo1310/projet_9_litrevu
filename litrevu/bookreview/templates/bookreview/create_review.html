@@ -5,20 +5,24 @@
     
     <form method="post" class="ticket-form" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="text-left"><p>Livre / Article</p></div>
-    {% for field in ticket_form.visible_fields %}
+    <div class="ticket-section">
+        <div class="text-left"><p>Livre / Article</p></div>
+        {% for field in ticket_form.visible_fields %}
             <div class="form-field-ticket">
                 {{ field.label_tag }}
                 {{ field }}
             </div>
         {% endfor %}
-    <div class="text-left"><p>Critique</p></div>
-    {% for field in review_form.visible_fields %}
-    <div class="form-field-ticket">
-        {{ field.label_tag }}
-        {{ field }}
     </div>
-    {% endfor %}
+    <div class="review-section">
+        <div class="text-left"><p>Critique</p></div>
+        {% for field in review_form.visible_fields %}
+        <div class="form-field-ticket">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+    </div>
     <div class="button-submit-right">
         <button type="submit" class="submit-button review-button">Envoyer</button>
     </div>
