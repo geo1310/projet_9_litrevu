@@ -1,33 +1,70 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="posts-page base-page">
     <h2>Vos posts</h2>
-    <ul>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% for post in posts %}
-            <li>
                 {% if post.ticket %}
-                    <div class="review">
-                        <p>Vous avez publié une critique - {{ post.time_created }}</p>
-                        <p>{{ post.headline }} - {{ post.rating }}</p>
-                        <p>{{ post.body }}</p>
-                        <div class="ticket-review">
-                            <p>Ticket - {{ post.ticket.user }}</p>
-                            <p>{{ post.ticket.title }}</p>
+                    <div class="post-review">
+                        <div class="title-date">
+                            <div class="post-icone">
+                                <img src="{% static 'icones/icone-critique.png' %}" alt="icone critique">
+                                Vous avez publié une critique
+                            </div>
+                            {{ post.time_created }}
+                        </div>
+                        <div>
+                            <div class="star-rating">
+                                <span>{{ post.headline }}</span>
+                                <span class='stars'>
+                                    {% for star in "x"|rjust:post.rating %}
+                                    <img src="{% static 'icones/icone-etoile.png' %}" alt="icone etoile">
+                                    {% endfor %}
+                                </span>
+                            </div>
+                                <p class="text-description">{{ post.body }}</p>
+                        </div>
+                        <div class="post-ticket">
+                            <div class="post-icone">
+                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
+                            </div>
+                            <p><strong>{{ post.ticket.title }}</strong></p>
                             <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
                         </div>
+                        <div class="connexion-button">
+                            <a href="{% url 'edit_review' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
+                            <a href="{% url 'delete_review' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                        </div>
                     </div>
-                      
                 {% else %}
-                    <div clas="ticket">
-                        <p>Vous avez publié un ticket - {{ post.time_created }}</p>
-                        <p>{{ post.title }}</p>
+                    <div class="post-ticket">
+                        <div class="title-date">
+                            <div class="post-icone">
+                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                Vous avez publié un ticket
+                            </div>
+                            {{ post.time_created }}
+                        </div>
+                        <p><strong>{{ post.title }}</strong></p>
                         <p>{{ post.description }}</p>
                         <img src="{{ post.image.url }}" alt="{{post.title}}">
+                        <div class="connexion-button">
+                            <a href="{% url 'edit_ticket' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
+                            <a href="{% url 'delete_ticket' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                        </div>
                     </div>
 
                 {% endif %}
-            </li>
+            
         {% endfor %}
-    </ul>
+    
 </div>
 {% endblock content %}

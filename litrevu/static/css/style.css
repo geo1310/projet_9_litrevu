@@ -22,13 +22,16 @@ body{
     
 }
 .main{  
-    padding: 50px 0;
+    padding: 50px 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background-color: white;
     
+}
+.p{
+    word-wrap: break-word;
 }
 .text-left{
     width: 100%;
@@ -52,11 +55,10 @@ body{
     color: #333;
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     text-shadow: 2px 2px 4px rgba(4, 81, 104, 0.5);
 }
 .base-page h3{
-    text-align: center;
     text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
 }
 img{
@@ -292,8 +294,6 @@ select{
 }
 
 
-
-
 /* page ticket */
 
 .ticket-page, .review-page, .posts-page{
@@ -365,6 +365,48 @@ select{
     border: 1px solid lightgrey;
     border-radius: 10px;
     box-shadow: 5px 5px 20px lightgray;
+}
+
+/* page posts */
+
+.post-ticket, .post-review{
+    width: 80%;
+    margin-bottom: 20px;
+    border: 1px solid lightgrey;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px lightgray;
+}
+
+.title-date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.post-icone{
+    display: flex;
+    align-items: center;
+    
+}
+.post-icone img{
+    width: 70px;
+    margin-right: 10px;
+    
+}
+.star-rating{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+.star-rating img{
+    width: 20px;
+}
+.stars{
+    margin-left: 30px;
 }
 
 /* footer */

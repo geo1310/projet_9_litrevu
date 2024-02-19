@@ -44,32 +44,56 @@ def edit_ticket(request, ticket_id):
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
-    delete_form = DeleteTicketForm()
+
     if request.method == "POST":
-        if "edit_ticket" in request.POST:
-            edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
-            if edit_form.is_valid():
-                edit_form.save()
 
-                return redirect("flux")
-            else:
-                # Afficher les erreurs de validation du formulaire
-                for field, errors in edit_form.errors.items():
-                    for error in errors:
-                        messages.error(
-                            request, f"Erreur dans le champ '{field}': {error}"
-                        )
+        edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, f"Le Ticket {ticket.title} a été modifié avec succès.")
+            return redirect("posts")
+        else:
+            # Afficher les erreurs de validation du formulaire
+            for field, errors in edit_form.errors.items():
+                for error in errors:
+                    messages.error(
+                        request, f"Erreur dans le champ '{field}': {error}"
+                    )
 
-        if "delete_ticket" in request.POST:
-            delete_form = DeleteTicketForm(request.POST)
-            if delete_form.is_valid():
-                ticket.delete()
-                return redirect("flux")
     context = {
         "edit_form": edit_form,
-        "delete_form": delete_form,
     }
     return render(request, "bookreview/edit_ticket.html", context=context)
+
+
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    # Vérifie que l'utilisateur est autorisé à supprimer l'objet
+    if ticket.user != request.user:
+
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à effectuer cette action."
+        )
+
+    try:
+        ticket.delete()
+        messages.success(request, f"Le Ticket {ticket.title} a été supprimé avec succès.")
+    except IntegrityError as e:
+        # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
+        messages.error(
+            request,
+            f"Une erreur d'intégrité de la base de données s'est produite : {e}",
+        )
+    except Exception as e:
+        # Gérer les autres exceptions génériques
+        messages.error(
+            request,
+            f"Une erreur s'est produite lors de la suppression de l'objet : {e}",
+        )
+
+    return redirect("posts")
 
 
 # Review
@@ -139,8 +163,8 @@ def edit_review(request, review_id):
         edit_form = ReviewForm(request.POST, instance=review)
         if edit_form.is_valid():
             edit_form.save()
-
-            return redirect("flux")
+            messages.success(request, f"La Critique {review.ticket} a été modifié avec succès.")
+            return redirect("posts")
         else:
             # Afficher les erreurs de validation du formulaire
             for field, errors in edit_form.errors.items():
@@ -153,6 +177,33 @@ def edit_review(request, review_id):
     }
     return render(request, "bookreview/edit_review.html", context=context)
 
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+
+    if review.user != request.user:
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à effectuer cette action."
+        )
+
+    try:
+        review.delete()
+        messages.success(request, f"La Critique {review.ticket} a été supprimé avec succès.")
+    except IntegrityError as e:
+        # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
+        messages.error(
+            request,
+            f"Une erreur d'intégrité de la base de données s'est produite : {e}",
+        )
+    except Exception as e:
+        # Gérer les autres exceptions génériques
+        messages.error(
+            request,
+            f"Une erreur s'est produite lors de la suppression de l'objet : {e}",
+        )
+
+    return redirect("posts")
 
 # Follow users
 
@@ -235,14 +286,19 @@ def follows_delete(request, follows_id):
 def posts(request):
     tickets = Ticket.objects.filter(user=request.user)
     reviews = Review.objects.filter(user=request.user)
-
     posts = list(tickets) + list(reviews)
-    print(posts)
 
     # Trier les posts par ordre antéchronologique
     posts.sort(key=lambda x: x.time_created, reverse=True)
 
-    return render(request, "bookreview/posts.html", {"posts": posts})
+    delete_form_ticket = DeleteTicketForm()
+
+    context = {
+        "posts": posts,
+        "delete_form_ticket": delete_form_ticket,
+    }
+
+    return render(request, "bookreview/posts.html", context)
 
 
 # Flux

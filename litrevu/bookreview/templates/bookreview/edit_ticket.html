@@ -23,18 +23,10 @@
             {% endif %}
         {% endfor %}
         <div class="button-submit-right">
+            <a href="{% url 'posts' %}"><button type="button" class="submit-button">Annuler</button></a>
             <button type="submit" class="submit-button ticket-button">Envoyer</button>
         </div> 
     </form>
-    
-    <div class="ticket-delete">
-        <h2>Supprimer votre ticket</h2>
-        <form method="post" class="ticket-form-delete">
-            {{ delete_form }}
-            {% csrf_token %}
-            <button type="submit" class="submit-button ticket-button">Supprimer</button>
-        </form>
-    </div>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
