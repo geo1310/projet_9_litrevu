@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static  %}
 {% block content %}
 <div class="review-page base-page">
-    <h2>Modifier une critique</h2>
+    <div class="icone-title">
+        <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+        <h2>Modifier une critique</h2>
+    </div>
     <div class="review-texte">Vous êtes en train de poster en réponse à</div>
     <div class="ticket-display">
         <div class="ticket-display-title">

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="ticket-page base-page">
-    <h2 class="ticket-h2">Modifier votre ticket</h2>
+    <div class="icone-title">
+        <img src="{% static 'icones/icone-ticket.png' %}" alt="icone ticket">
+        <h2 class="ticket-h2">Modifier votre ticket</h2>
+    </div>
     <form method="post" class="ticket-form" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in edit_form %}

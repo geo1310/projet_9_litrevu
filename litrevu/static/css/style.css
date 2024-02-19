@@ -65,6 +65,16 @@ img{
     max-width: 200px;
     border-radius: 10px;
 }
+.icone-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
+}
+.icone-title img{
+    width: 100px;
+    margin-right: 20px;
+}
 
 /* affichage des messages de succes et d erreurs */
 
@@ -296,7 +306,7 @@ select{
 
 /* page ticket */
 
-.ticket-page, .review-page, .posts-page{
+.ticket-page, .review-page, .posts-page, .flux-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -346,9 +356,7 @@ select{
     justify-content: space-between;
     margin: 0;
 }
-.review-page h3, .review-page img{
-    margin: 0;
-}
+
 .review-texte{
     width: 80%;
     margin-top: 20px;
@@ -370,7 +378,7 @@ select{
 /* page posts */
 
 .post-ticket, .post-review{
-    width: 80%;
+    width: 70%;
     margin-bottom: 20px;
     border: 1px solid lightgrey;
     padding: 20px;

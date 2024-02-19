@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="follows-page base-page">
     <div class="follows-form-title">
-        <h2>Suivre d'autres utilisateurs</h2>
+        <div class="icone-title">
+            <img src="{% static 'icones/icone-loupe.png' %}" alt="icone loupe">
+            <h2>Suivre d'autres utilisateurs</h2>
+        </div>
         <div>
             <form method="post" class="follows-form">
                 {% csrf_token %}

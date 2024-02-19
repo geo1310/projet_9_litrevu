@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <div class="signup-page">
-        <h2>Inscrivez-vous</h2>
+        <div class="icone-title">
+            <img src="{% static 'icones/icone-signup.png' %}" alt="icone signup">
+            <h2>Inscrivez-vous</h2>
+        </div>
     <form method="post">
         {% csrf_token %}
                 {% for field in form %}

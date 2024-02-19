@@ -2,7 +2,10 @@
 {% load static %}
 {% block content %}
 <div class="posts-page base-page">
-    <h2>Vos posts</h2>
+    <div class="icone-title">
+        <img src="{% static 'icones/icone-post.png' %}" alt="icone critique">
+        <h2>Vos posts</h2>
+    </div>
     {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -15,7 +18,7 @@
                     <div class="post-review">
                         <div class="title-date">
                             <div class="post-icone">
-                                <img src="{% static 'icones/icone-critique.png' %}" alt="icone critique">
+                                <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
                                 Vous avez publié une critique
                             </div>
                             {{ post.time_created }}

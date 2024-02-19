@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load static%}
 {% block content %}
 <div class="flux-page base-page">
-    <h2>Book Review - Flux page</h2>
+    <div class="icone-title">
+        <img src="{% static 'icones/icone-flux.png' %}" alt="icone flux">
+        <h2>Flux</h2>
+    </div>
 </div>
 {% endblock content %}

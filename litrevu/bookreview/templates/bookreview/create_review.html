@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="ticket-page base-page">
-    <h2>Créer une critique</h2>
-    
+    <div class="icone-title">
+        <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+        <h2>Créer une critique</h2>
+    </div>
     <form method="post" class="ticket-form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="ticket-section">
