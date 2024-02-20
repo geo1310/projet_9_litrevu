@@ -9,12 +9,12 @@ from .models import UserFollows, Ticket, Review
 from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
 
-# Ticket
+# Ticket ---------------------------------------------------------------------
 
 
 @login_required
 def create_ticket(request):
-    """Création d'un Ticket"""
+    """ Create Ticket """
 
     ticket_form = TicketForm()
     if request.method == "POST":
@@ -40,7 +40,7 @@ def create_ticket(request):
 
 @login_required
 def edit_ticket(request, ticket_id):
-    """Edition d'un Ticket"""
+    """ Update ticket """
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
@@ -68,6 +68,7 @@ def edit_ticket(request, ticket_id):
 
 @login_required
 def delete_ticket(request, ticket_id):
+    """ delete ticket """
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
     # Vérifie que l'utilisateur est autorisé à supprimer l'objet
@@ -96,7 +97,7 @@ def delete_ticket(request, ticket_id):
     return redirect("posts")
 
 
-# Review
+# Review ---------------------------------------------------------------------
 
 
 @login_required
@@ -205,7 +206,7 @@ def delete_review(request, review_id):
 
     return redirect("posts")
 
-# Follow users
+# Follows users  ---------------------------------------------------------------------
 
 
 @login_required
@@ -279,11 +280,13 @@ def follows_delete(request, follows_id):
     return redirect("follows")
 
 
-# Posts
+# Posts ---------------------------------------------------------------------
 
 
 @login_required
 def posts(request):
+    ''' Liste de tous les tickets et reviews de l'utilisateur connecté'''
+
     tickets = Ticket.objects.filter(user=request.user)
     reviews = Review.objects.filter(user=request.user)
     posts = list(tickets) + list(reviews)
@@ -301,10 +304,29 @@ def posts(request):
     return render(request, "bookreview/posts.html", context)
 
 
-# Flux
+# Flux ---------------------------------------------------------------------
 
 
 @login_required
 def flux(request):
 
-    return render(request, "bookreview/flux.html")
+    # récupération des posts de l'utilsateur connecté
+    tickets = Ticket.objects.filter(user=request.user)
+    reviews = Review.objects.filter(user=request.user)
+    posts = list(tickets) + list(reviews)
+
+    # récupération des posts des followers
+    follows = UserFollows.objects.filter(user=request.user)
+    for follow in follows:
+        tickets_followed = Ticket.objects.filter(user=follow.followed_user)
+        reviews_followed = Review.objects.filter(user=follow.followed_user)
+        posts += list(tickets_followed) + list(reviews_followed)
+
+    # Trier les posts par ordre antéchronologique
+    posts.sort(key=lambda x: x.time_created, reverse=True)
+
+    context = {
+        "posts": posts,
+    }
+
+    return render(request, "bookreview/flux.html", context)

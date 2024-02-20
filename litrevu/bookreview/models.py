@@ -14,6 +14,13 @@ class Ticket(models.Model):
     def __str__(self):
         return self.title
 
+    def has_review(self):
+        """
+        Vérifie si ce ticket a une critique associée.
+        Retourne True si une critique existe pour ce ticket, False sinon.
+        """
+        return self.review_set.exists()
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)

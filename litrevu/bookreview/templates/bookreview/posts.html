@@ -40,9 +40,10 @@
                                 <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
                             </div>
                             <p><strong>{{ post.ticket.title }}</strong></p>
+                            <p>{{ post.ticket.description }}</p>
                             <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
                         </div>
-                        <div class="connexion-button">
+                        <div class="connexion-button button-submit-right">
                             <a href="{% url 'edit_review' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
                             <a href="{% url 'delete_review' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
                         </div>
@@ -59,7 +60,7 @@
                         <p><strong>{{ post.title }}</strong></p>
                         <p>{{ post.description }}</p>
                         <img src="{{ post.image.url }}" alt="{{post.title}}">
-                        <div class="connexion-button">
+                        <div class="connexion-button button-submit-right">
                             <a href="{% url 'edit_ticket' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
                             <a href="{% url 'delete_ticket' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
                         </div>
