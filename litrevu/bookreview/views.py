@@ -341,6 +341,10 @@ def flux(request):
         reviews_followed = Review.objects.filter(user=follow.followed_user)
         posts_set |= set(tickets_followed) | set(reviews_followed)
 
+    # récupération des reponses aux tickets de l'utilisateur connecté
+    user_reviews = Review.objects.filter(ticket__user=request.user)
+    posts_set |= set(user_reviews)
+
     # Trier les posts par ordre antéchronologique
     posts = sorted(posts_set, key=lambda x: x.time_created, reverse=True)
 
