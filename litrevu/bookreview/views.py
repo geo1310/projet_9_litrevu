@@ -330,17 +330,19 @@ def flux(request):
     # récupération des posts de l'utilsateur connecté
     tickets = Ticket.objects.filter(user=request.user)
     reviews = Review.objects.filter(user=request.user)
-    posts = list(tickets) + list(reviews)
+
+    # Utilisation d'un ensemble pour éviter les doublons
+    posts_set = set(tickets) | set(reviews)
 
     # récupération des posts des followers
     follows = UserFollows.objects.filter(user=request.user)
     for follow in follows:
         tickets_followed = Ticket.objects.filter(user=follow.followed_user)
         reviews_followed = Review.objects.filter(user=follow.followed_user)
-        posts += list(tickets_followed) + list(reviews_followed)
+        posts_set |= set(tickets_followed) | set(reviews_followed)
 
     # Trier les posts par ordre antéchronologique
-    posts.sort(key=lambda x: x.time_created, reverse=True)
+    posts = sorted(posts_set, key=lambda x: x.time_created, reverse=True)
 
     context = {
         "posts": posts,
