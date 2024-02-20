@@ -4,6 +4,8 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
+from django.core.files.storage import default_storage
+
 from django.db import IntegrityError
 from .models import UserFollows, Ticket, Review
 from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
@@ -14,7 +16,7 @@ from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
 @login_required
 def create_ticket(request):
-    """ Create Ticket """
+    """Create Ticket"""
 
     ticket_form = TicketForm()
     if request.method == "POST":
@@ -40,7 +42,7 @@ def create_ticket(request):
 
 @login_required
 def edit_ticket(request, ticket_id):
-    """ Update ticket """
+    """Update ticket"""
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
@@ -50,15 +52,15 @@ def edit_ticket(request, ticket_id):
         edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
         if edit_form.is_valid():
             edit_form.save()
-            messages.success(request, f"Le Ticket {ticket.title} a été modifié avec succès.")
+            messages.success(
+                request, f"Le Ticket {ticket.title} a été modifié avec succès."
+            )
             return redirect("posts")
         else:
             # Afficher les erreurs de validation du formulaire
             for field, errors in edit_form.errors.items():
                 for error in errors:
-                    messages.error(
-                        request, f"Erreur dans le champ '{field}': {error}"
-                    )
+                    messages.error(request, f"Erreur dans le champ '{field}': {error}")
 
     context = {
         "edit_form": edit_form,
@@ -68,7 +70,7 @@ def edit_ticket(request, ticket_id):
 
 @login_required
 def delete_ticket(request, ticket_id):
-    """ delete ticket """
+    """delete ticket"""
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
     # Vérifie que l'utilisateur est autorisé à supprimer l'objet
@@ -79,8 +81,18 @@ def delete_ticket(request, ticket_id):
         )
 
     try:
+        # Supprimer le fichier image associé au ticket s'il existe
+        if ticket.image:
+            # Obtenir le chemin du fichier
+            file_path = ticket.image.path
+            # Supprimer le fichier
+            default_storage.delete(file_path)
+
         ticket.delete()
-        messages.success(request, f"Le Ticket {ticket.title} a été supprimé avec succès.")
+
+        messages.success(
+            request, f"Le Ticket {ticket.title} a été supprimé avec succès."
+        )
     except IntegrityError as e:
         # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
         messages.error(
@@ -164,7 +176,9 @@ def edit_review(request, review_id):
         edit_form = ReviewForm(request.POST, instance=review)
         if edit_form.is_valid():
             edit_form.save()
-            messages.success(request, f"La Critique {review.ticket} a été modifié avec succès.")
+            messages.success(
+                request, f"La Critique {review.ticket} a été modifié avec succès."
+            )
             return redirect("posts")
         else:
             # Afficher les erreurs de validation du formulaire
@@ -190,7 +204,9 @@ def delete_review(request, review_id):
 
     try:
         review.delete()
-        messages.success(request, f"La Critique {review.ticket} a été supprimé avec succès.")
+        messages.success(
+            request, f"La Critique {review.ticket} a été supprimé avec succès."
+        )
     except IntegrityError as e:
         # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
         messages.error(
@@ -205,6 +221,7 @@ def delete_review(request, review_id):
         )
 
     return redirect("posts")
+
 
 # Follows users  ---------------------------------------------------------------------
 
@@ -285,7 +302,7 @@ def follows_delete(request, follows_id):
 
 @login_required
 def posts(request):
-    ''' Liste de tous les tickets et reviews de l'utilisateur connecté'''
+    """Liste de tous les tickets et reviews de l'utilisateur connecté"""
 
     tickets = Ticket.objects.filter(user=request.user)
     reviews = Review.objects.filter(user=request.user)
