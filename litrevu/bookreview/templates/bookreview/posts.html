@@ -18,8 +18,10 @@
                 <div class="post-review">
                     <div class="title-date">
                         <div class="post-icone">
-                            <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
-                            Vous avez publié une critique
+                            <div class="post-icone-title">
+                                <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+                                Vous avez publié une critique
+                            </div>
                         </div>
                         {{ post.time_created }}
                     </div>
@@ -36,8 +38,11 @@
                     </div>
                     <div class="post-ticket">
                         <div class="post-icone">
-                            <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
-                            <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
+                            <div class="post-icone-title">
+                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
+                            </div>
+                            <span>{{ post.ticket.time_created }}</span>
                         </div>
                         <p><strong>{{ post.ticket.title }}</strong></p>
                         <p>{{ post.ticket.description }}</p>
@@ -52,8 +57,10 @@
                 <div class="post-ticket">
                     <div class="title-date">
                         <div class="post-icone">
-                            <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
-                            Vous avez publié un ticket
+                            <div class="post-icone-title">
+                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                Vous avez publié un ticket
+                            </div>
                         </div>
                         {{ post.time_created }}
                     </div>

@@ -106,6 +106,11 @@ img {
     text-shadow: 1px 1px 1px var(--text-shadow-1);
 }
 
+.post-icone-title {
+    display: flex;
+    align-items: center;
+}
+
 .icone-title img {
     width: 100px;
     margin-right: 20px;
@@ -174,7 +179,6 @@ img {
 .nav a:hover, .logout-button:hover {
     border-bottom: 4px solid var(--text-color-2);
     cursor: pointer;
-
 }
 
 #header img {
@@ -462,9 +466,10 @@ select {
 }
 
 .post-icone {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
 }
 
@@ -510,7 +515,7 @@ select {
 
 @media all and (max-width: 1120px) {
     #body {
-        width: 100vw;
+        width: 100%;
         margin: 0;
         padding: 0;
     }
@@ -543,8 +548,6 @@ select {
     .logo-header-litrevu {
         margin-bottom: 10px;
     }
-
-
 }
 
 @media all and (max-width: 700px) {
@@ -575,12 +578,12 @@ select {
         width: auto;
     }
 
-    .title-date {
+    .title-date, .post-icone {
         flex-direction: column-reverse;
     }
 
     .review-form {
-        width: 90vw;
+        width: 90%;
         padding: 20px 0;
     }
 
@@ -589,7 +592,7 @@ select {
     }
 
     .form-field-ticket, textarea {
-        width: 90vw;
+        width: 90%;
     }
 
     .star-rating {
@@ -616,7 +619,7 @@ select {
     }
 
     .post-ticket, .post-review {
-        width: 80vw;
+        width: 90%;
         border-radius: 10px;
         border: 3px solid var(--border-shadow-color);
     }

@@ -1,10 +1,19 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.conf import settings
-from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator  # Importation des validateurs
+from django.conf import settings  # Importation des paramètres du projet Django
+from django.db import models  # Importation des modèles Django
 
 
 class Ticket(models.Model):
-    # Your Ticket model definition goes here
+    """
+    Modèle pour les tickets.
+
+    Attributes:
+        title (CharField): Titre du ticket.
+        description (TextField): Description détaillée du ticket.
+        user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour associer le ticket à un utilisateur.
+        image (ImageField): Champ pour télécharger une image liée au ticket.
+        time_created (DateTimeField): Date et heure de création du ticket.
+    """
     title = models.CharField(max_length=128, verbose_name="Titre")
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -23,6 +32,17 @@ class Ticket(models.Model):
 
 
 class Review(models.Model):
+    """
+    Modèle pour les critiques.
+
+    Attributes:
+        ticket (ForeignKey): Clé étrangère vers le modèle Ticket pour associer la critique à un ticket.
+        rating (PositiveSmallIntegerField): Note attribuée à la critique.
+        headline (CharField): Titre de la critique.
+        body (TextField): Corps de la critique (commentaire).
+        user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour associer la critique à un utilisateur.
+        time_created (DateTimeField): Date et heure de création de la critique.
+    """
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)], verbose_name="Note"
@@ -37,6 +57,13 @@ class Review(models.Model):
 
 
 class UserFollows(models.Model):
+    """
+    Modèle pour les utilisateurs suivis.
+
+    Attributes:
+        user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour représenter l'utilisateur qui suit.
+        followed_user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour représenter l'utilisateur suivi.
+    """
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="following"
     )
@@ -45,7 +72,7 @@ class UserFollows(models.Model):
     )
 
     class Meta:
-        # for unique user-user_followed pairs
+        # Contrainte pour assurer l'unicité des paires utilisateur-utilisateur_suivi
         unique_together = (
             "user",
             "followed_user",

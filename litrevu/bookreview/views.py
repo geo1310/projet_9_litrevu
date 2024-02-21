@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render, redirect  # Importation des fonctions de rendu et de redirection
+from django.contrib.auth.decorators import login_required  # Décorateur pour vérifier si l'utilisateur est connecté
+from django.http import HttpResponseForbidden  # Importation de la réponse HTTP pour les interdictions
+from django.shortcuts import get_object_or_404  # Fonction pour obtenir un objet ou renvoyer une erreur 404
+from django.contrib import messages  # Module pour gérer les messages flash
+from django.utils import timezone  # Importation pour manipuler les dates et heures
+from django.core.files.storage import default_storage  # Stockage par défaut pour gérer les fichiers
+from django.db import IntegrityError  # Importation pour gérer les erreurs d'intégrité de la base de données
 
-from django.core.files.storage import default_storage
-
-from django.db import IntegrityError
 from .models import UserFollows, Ticket, Review
 from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
@@ -16,7 +16,19 @@ from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
 
 @login_required
 def create_ticket(request):
-    """Create Ticket"""
+    """
+    Vue pour créer un nouveau ticket.
+
+    Permet aux utilisateurs de créer un nouveau ticket. L'utilisateur doit être connecté.
+    Après la création réussie du ticket, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+    request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+    HttpResponse: Renvoie le rendu de la page de création de ticket avec le formulaire.
+
+    """
 
     ticket_form = TicketForm()
     if request.method == "POST":
@@ -42,7 +54,20 @@ def create_ticket(request):
 
 @login_required
 def edit_ticket(request, ticket_id):
-    """Update ticket"""
+    """
+    Vue pour éditer un ticket existant.
+
+    Permet aux utilisateurs d'éditer un ticket existant. L'utilisateur doit être connecté.
+    Après l'édition réussie du ticket, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+        ticket_id: ID du ticket à éditer.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page d'édition de ticket avec le formulaire.
+
+    """
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     edit_form = TicketForm(instance=ticket)
@@ -51,6 +76,7 @@ def edit_ticket(request, ticket_id):
 
         edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
         if edit_form.is_valid():
+            ticket.time_created = timezone.now()
             edit_form.save()
             messages.success(
                 request, f"Le Ticket {ticket.title} a été modifié avec succès."
@@ -70,7 +96,20 @@ def edit_ticket(request, ticket_id):
 
 @login_required
 def delete_ticket(request, ticket_id):
-    """delete ticket"""
+    """
+    Vue pour supprimer un ticket existant.
+
+    Permet aux utilisateurs de supprimer un ticket existant. L'utilisateur doit être connecté.
+    Après la suppression réussie du ticket, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+        ticket_id: ID du ticket à supprimer.
+
+    Returns:
+        HttpResponse: Redirige vers la page de flux après la suppression réussie du ticket.
+
+    """
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
     # Vérifie que l'utilisateur est autorisé à supprimer l'objet
@@ -140,7 +179,20 @@ def create_review(request):
 
 @login_required
 def create_review_ticket(request, ticket_id):
-    """Creation d'une Critique"""
+    """
+    Vue pour créer une nouvelle critique.
+
+    Permet aux utilisateurs de créer une nouvelle critique pour un ticket. L'utilisateur doit être connecté.
+    Si la critique et le ticket sont valides, ils sont enregistrés dans la base de données.
+    Après la création réussie de la critique, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page de création de critique avec le formulaire.
+
+    """
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     review_form = ReviewForm()
@@ -167,7 +219,21 @@ def create_review_ticket(request, ticket_id):
 
 @login_required
 def edit_review(request, review_id):
-    """Edition d'une Critique"""
+    """
+    Vue pour éditer une critique existante.
+
+    Permet aux utilisateurs d'éditer une critique existante. L'utilisateur doit être connecté.
+    Si la critique est valide, elle est mise à jour dans la base de données.
+    Après l'édition réussie de la critique, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+        review_id: ID de la critique à éditer.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page d'édition de critique avec le formulaire.
+
+    """
 
     review = get_object_or_404(Review, id=review_id)
     edit_form = ReviewForm(instance=review)
@@ -175,6 +241,7 @@ def edit_review(request, review_id):
     if request.method == "POST":
         edit_form = ReviewForm(request.POST, instance=review)
         if edit_form.is_valid():
+            review.time_created = timezone.now()
             edit_form.save()
             messages.success(
                 request, f"La Critique {review.ticket} a été modifié avec succès."
@@ -195,6 +262,20 @@ def edit_review(request, review_id):
 
 @login_required
 def delete_review(request, review_id):
+    """
+    Vue pour supprimer une critique existante.
+
+    Permet aux utilisateurs de supprimer une critique existante. L'utilisateur doit être connecté.
+    Après la suppression réussie de la critique, l'utilisateur est redirigé vers la page de flux.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+        review_id: ID de la critique à supprimer.
+
+    Returns:
+        HttpResponse: Redirige vers la page de flux après la suppression réussie de la critique.
+
+    """
     review = get_object_or_404(Review, id=review_id)
 
     if review.user != request.user:
@@ -228,7 +309,21 @@ def delete_review(request, review_id):
 
 @login_required
 def follows(request):
-    """Abonnements et abonés d'un utilisateur"""
+    """
+    Vue pour afficher les abonnements et les abonnés d'un utilisateur.
+
+    Permet à l'utilisateur de voir la liste des utilisateurs qu'il suit et des utilisateurs qui le suivent.
+    L'utilisateur doit être connecté pour accéder à cette vue.
+    Il peut également ajouter de nouveaux abonnements en soumettant un formulaire.
+    Si un utilisateur est déjà suivi, un message d'erreur approprié est affiché.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page d'affichage des abonnements et abonnés.
+
+    """
 
     # Récupérer les utilisateurs suivis et les abonnés de l'utilisateur connecté
     followings = UserFollows.objects.filter(user=request.user)
@@ -267,7 +362,22 @@ def follows(request):
 
 @login_required
 def follows_delete(request, follows_id):
-    """Suppression des abonnements d'un utilisateur"""
+    """
+    Vue pour supprimer un abonnement d'un utilisateur.
+
+    Permet à l'utilisateur de supprimer un abonnement existant. L'utilisateur doit être connecté.
+    Après la suppression réussie de l'abonnement, l'utilisateur est redirigé vers la page d'affichage des abonnements
+    et abonnés.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+        follows_id: ID de l'abonnement à supprimer.
+
+    Returns:
+        HttpResponse: Redirige vers la page d'affichage des abonnements et abonnés après la suppression réussie
+        de l'abonnement.
+
+    """
 
     follow = get_object_or_404(UserFollows, id=follows_id)
 
@@ -302,7 +412,20 @@ def follows_delete(request, follows_id):
 
 @login_required
 def posts(request):
-    """Liste de tous les tickets et reviews de l'utilisateur connecté"""
+    """
+    Vue pour afficher la liste de tous les tickets et reviews de l'utilisateur connecté.
+
+    Permet à l'utilisateur de voir tous les tickets et reviews qu'il a créés.
+    L'utilisateur doit être connecté pour accéder à cette vue.
+    Les posts sont triés par ordre antéchronologique de leur date de création.
+    L'utilisateur peut lancer une modification ou une suppression de ses posts.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page d'affichage des posts de l'utilisateur.
+    """
 
     tickets = Ticket.objects.filter(user=request.user)
     reviews = Review.objects.filter(user=request.user)
@@ -326,6 +449,19 @@ def posts(request):
 
 @login_required
 def flux(request):
+    """
+    Vue pour afficher le flux d'activités de l'utilisateur connecté.
+
+    Affiche les posts de l'utilisateur connecté, des utilisateurs qu'il suit et
+    de toutes les réponses à ses tickets.
+    Les posts sont triés par ordre antéchronologique de leur date de création.
+
+    Args:
+        request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page d'affichage du flux d'activités.
+    """
 
     # récupération des posts de l'utilsateur connecté
     tickets = Ticket.objects.filter(user=request.user)
