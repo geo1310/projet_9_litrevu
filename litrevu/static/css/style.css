@@ -14,14 +14,14 @@ html {
     justify-content: center;
 }
 
-body{
+#body{
     width: 60%;
     opacity: 0.95;
     font-family: Verdana, sans-serif; 
     font-size: 100%;
     
 }
-.main{  
+#main{  
     padding: 50px 10px;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,6 @@ body{
     color: #333;
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 40px;
     text-shadow: 2px 2px 4px rgba(4, 81, 104, 0.5);
 }
 .base-page h3{
@@ -101,7 +100,7 @@ img{
 
 /* Header */
 
-.header {
+#header {
     background-color: #478ac9;
     color: white;
     height: 100px;
@@ -140,7 +139,7 @@ img{
     cursor: pointer;
 
 }
-.header img {
+#header img {
     height: 100px;
     margin-right: 20px;
 }
@@ -254,7 +253,6 @@ select{
     display: flex;
     flex-direction: row;
     justify-content:center;
-    align-items: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -433,7 +431,7 @@ select{
 
 /* footer */
 
-.footer {
+#footer {
     margin: 0;
     display: flex;
     align-items: center;
@@ -447,14 +445,24 @@ select{
     height: 80px;
 }
 
+/* Responsive */
+
 @media all and (max-width: 1120px) {
-    body{
-        width: 100%;
+    #body{
+        width: 100vw;
+        margin: 0;
+        padding: 0;
     }
     /* Style pour le header */
-    .header {
+    #header {
         text-align: center;
         height: 150px;
+    }
+    #header img{
+        height: 70px;
+    }
+    #header h1{
+        font-size: 22px;
     }
     .titre-header {
         display: flex;
@@ -473,6 +481,7 @@ select{
 }
 
 @media all and (max-width: 700px) {
+    
     .connexion-button{
         height: 100px;
         display: flex;
@@ -480,17 +489,34 @@ select{
         align-items: center;
         justify-content: space-between;
     }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .ticket-display{
+        width: 90%;
+    }
     .ticket-display-title{
         flex-direction:column-reverse;
+    }
+    .ticket-section, .review-section{
+        width: auto;
     }
     .title-date{
         flex-direction: column-reverse;
     }
-    form{
-       width: 80%;
+    
+    .review-form{
+        width: 90vw;
+        padding: 20px 0;
     }
     .form-field{
-        width: 100%;
+        width: 80%;
+    }
+    .form-field-ticket, textarea{
+        width: 90vw;
     }
     .star-rating{
         flex-direction: column;
@@ -512,7 +538,17 @@ select{
         font-size: 18px;
     }
     .post-ticket, .post-review{
-        width: 90%;
-        
+        width: 80vw;
+        border-radius: 10px;
+        border: 3px solid lightgrey;
+    }
+    input, select {
+        width: 100%;
+    }
+    .icone-title img{
+        width: 70px;
+    }
+    .icone-title h2{
+        font-size:20px;
     }
 }
