@@ -1,60 +1,60 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LITReview</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logos/lt_logo_white.png' %}">
-</head>
-<body id="body">
-    <header id="header">
-        <div class="titre-header">
-            <img src="{% static 'logos/lt_logo_white.png' %}" alt="logo header litrevu" class="logo-header-litrevu">
-        <div>
-            <h1>LITReview</h1>
-            {% if user.is_authenticated %}
-            <span>bienvenue {{ request.user }}</span>
-            {% endif %}
-        </div>
-        </div>
-        {% if user.is_authenticated %}
-            <div class="nav">
-                <ul>
-                    <li>
-                        <a href="{% url 'flux' %}">
-                            Flux
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'posts' %}">
-                            Posts
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'follows' %}">
-                            Abonnements
-                        </a>
-                    </li>
-                    <li>
-                        <form action="{% url 'logout' %}" method="post" class="logout-form">
-                            {% csrf_token %}
-                            <button type="submit" class="logout-button">
-                                Déconnexion
-                            </button>
-                        </form>
-                    </li>
-                </ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LITReview</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logos/lt_logo_white.png' %}">
+    </head>
+    <body id="body">
+        <header id="header">
+            <div class="titre-header">
+                <img src="{% static 'logos/lt_logo_white.png' %}" alt="logo header litrevu" class="logo-header-litrevu">
+                <div>
+                    <h1>LITReview</h1>
+                    {% if user.is_authenticated %}
+                        <span>bienvenue {{ request.user }}</span>
+                    {% endif %}
+                </div>
             </div>
-        {% endif %}
-        
-    </header>
-    <div id="main">
-        {% block content %}{% endblock content %}
-    </div>
-    <footer id="footer">
-        <img class="logo-footer" src="{% static 'logos/lt_logo_white.png' %}" alt="logo footer litreview">
-    </footer>
-</body>
+            {% if user.is_authenticated %}
+                <div class="nav">
+                    <ul>
+                        <li>
+                            <a href="{% url 'flux' %}">
+                                Flux
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'posts' %}">
+                                Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'follows' %}">
+                                Abonnements
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">
+                                    Déconnexion
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+
+        </header>
+        <div id="main">
+            {% block content %}{% endblock content %}
+        </div>
+        <footer id="footer">
+            <img class="logo-footer" src="{% static 'logos/lt_logo_white.png' %}" alt="logo footer litreview">
+        </footer>
+    </body>
 </html>

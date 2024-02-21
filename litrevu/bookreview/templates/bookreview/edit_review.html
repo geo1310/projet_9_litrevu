@@ -1,42 +1,42 @@
 {% extends 'base.html' %}
 {% load static  %}
 {% block content %}
-<div class="review-page base-page">
-    <div class="icone-title">
-        <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
-        <h2>Modifier une critique</h2>
-    </div>
-    <div class="review-texte">Vous êtes en train de poster en réponse à</div>
-    <div class="ticket-display">
-        <div class="ticket-display-title">
-            <p>{{ ticket.user }} a demandé une critique.</p>
-            <p>{{ ticket.time_created}}</p>
+    <div class="review-page base-page">
+        <div class="icone-title">
+            <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+            <h2>Modifier une critique</h2>
         </div>
-        <h3>{{ ticket.title }}</h3>
-        <p>{{ ticket.description }}</p>
-        <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="ticket-img">
-        <br>
-    </div>
-    <form method="post" class="review-form">
-    {% csrf_token %}
-    {% for field in edit_form.visible_fields %}
-            <div class="form-field-ticket">
-                {{ field.label_tag }}
-                {{ field }}
+        <div class="review-texte">Vous êtes en train de poster en réponse à</div>
+        <div class="ticket-display">
+            <div class="ticket-display-title">
+                <p>{{ ticket.user }} a demandé une critique.</p>
+                <p>{{ ticket.time_created}}</p>
             </div>
-        {% endfor %}
-        <div class="button-submit-right">
-            <a href="{% url 'posts' %}"><button type="button" class="submit-button">Annuler</button></a>
-            <button type="submit" class="submit-button review-button">Envoyer</button>
+            <h3>{{ ticket.title }}</h3>
+            <p>{{ ticket.description }}</p>
+            <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="ticket-img">
+            <br>
         </div>
-          
-    </form>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            {% for field in edit_form.visible_fields %}
+                <div class="form-field-ticket">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <div class="button-submit-right">
+                <a href="{% url 'posts' %}"><button type="button" class="submit-button">Annuler</button></a>
+                <button type="submit" class="submit-button review-button">Envoyer</button>
+            </div>
+
+        </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock content %}

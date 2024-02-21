@@ -1,59 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="follows-page base-page">
-    <div class="follows-form-title">
-        <div class="icone-title">
-            <img src="{% static 'icones/icone-loupe.png' %}" alt="icone loupe">
-            <h2>Suivre d'autres utilisateurs</h2>
+    <div class="follows-page base-page">
+        <div class="follows-form-title">
+            <div class="icone-title">
+                <img src="{% static 'icones/icone-loupe.png' %}" alt="icone loupe">
+                <h2>Suivre d'autres utilisateurs</h2>
+            </div>
+            <div>
+                <form method="post" class="follows-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-field-follows">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="submit-button">Ajouter</button>
+                </form>
+            </div>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
-        <div>
-            <form method="post" class="follows-form">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-field-follows">
-                        {{ field }}
-                    </div>
-                {% endfor %}
-                <button type="submit" class="submit-button">Ajouter</button>  
-            </form>
-        </div>
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
+
+        {% if followings %}
+            <div class="following">
+                <h3>Vos Abonnements</h3>
+                <p>Utilisateurs que vous suivez</p>
+                <div class="follows-list">
+                    {% for following in followings %}
+                        <div class="follows-item">
+                            <span class="follows-username">{{ following.followed_user }}</span>
+                            <a href="{% url 'follows_delete' following.id %}" class="follows-button">Désabonner</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if followers %}
+            <div class="followers">
+                <h3>Vos Abonnés</h3>
+                <p>Utilisateurs qui vous suivent</p>
+                <div class="follows-list">
+                    {% for follower in followers %}
+                        <div class="follows-item">
+                            <span class="follows-username">{{ follower.user }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         {% endif %}
     </div>
-    
-    {% if followings %}
-        <div class="following">
-            <h3>Vos Abonnements</h3>
-            <p>Utilisateurs que vous suivez</p>
-            <div class="follows-list">
-                {% for following in followings %}
-                    <div class="follows-item">
-                        <span class="follows-username">{{ following.followed_user }}</span>
-                        <a href="{% url 'follows_delete' following.id %}" class="follows-button">Désabonner</a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-    
-    {% if followers %}
-        <div class="followers">
-            <h3>Vos Abonnés</h3>
-            <p>Utilisateurs qui vous suivent</p>
-            <div class="follows-list">
-                {% for follower in followers %}
-                    <div class="follows-item">
-                        <span class="follows-username">{{ follower.user }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-</div>
 {% endblock content %}

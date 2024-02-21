@@ -1,42 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="ticket-page base-page">
-    <div class="icone-title">
-        <img src="{% static 'icones/icone-ticket.png' %}" alt="icone ticket">
-        <h2 class="ticket-h2">Modifier votre ticket</h2>
-    </div>
-    <form method="post" class="ticket-form" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in edit_form %}
-            {% if field.name == 'image' %}
-                <div class="form-field-ticket">
-                    {{ field.label_tag }}
-                    <br>
-                    <img src="{{ field.value.url }}" alt="{{ field.value }}" class="ticket-img">
-                    <br>
-                    <input type="file" name="{{ field.name }}" accept="image/*">
-                </div>
-            {% elif field.name == 'edit_ticket' %}
-                {{ field }}
-            {% else %}
-                <div class="form-field-ticket">
-                    {{ field.label_tag }}
+    <div class="ticket-page base-page">
+        <div class="icone-title">
+            <img src="{% static 'icones/icone-ticket.png' %}" alt="icone ticket">
+            <h2 class="ticket-h2">Modifier votre ticket</h2>
+        </div>
+        <form method="post" class="ticket-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in edit_form %}
+                {% if field.name == 'image' %}
+                    <div class="form-field-ticket">
+                        {{ field.label_tag }}
+                        <br>
+                        <img src="{{ field.value.url }}" alt="{{ field.value }}" class="ticket-img">
+                        <br>
+                        <input type="file" name="{{ field.name }}" accept="image/*">
+                    </div>
+                {% elif field.name == 'edit_ticket' %}
                     {{ field }}
-                </div>
-            {% endif %}
-        {% endfor %}
-        <div class="button-submit-right">
-            <a href="{% url 'posts' %}"><button type="button" class="submit-button">Annuler</button></a>
-            <button type="submit" class="submit-button ticket-button">Envoyer</button>
-        </div> 
-    </form>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
+                {% else %}
+                    <div class="form-field-ticket">
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="button-submit-right">
+                <a href="{% url 'posts' %}"><button type="button" class="submit-button">Annuler</button></a>
+                <button type="submit" class="submit-button ticket-button">Envoyer</button>
+            </div>
+        </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock content %}

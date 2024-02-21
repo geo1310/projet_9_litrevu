@@ -6,22 +6,22 @@
             <img src="{% static 'icones/icone-signup.png' %}" alt="icone signup">
             <h2>Inscrivez-vous</h2>
         </div>
-    <form method="post">
-        {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-field">
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {% if field.errors %}
-                            <p class="signup-error">{{ field.errors }}</p>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-        <div class="connexion-button">
-            <a href="{% url 'login' %}"><button type="button" class="submit-button">Retourner</button></a>
-            <button type="submit" class="submit-button">S’inscrire</button>
-        </div>
-        
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="signup-error">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="connexion-button">
+                <a href="{% url 'login' %}"><button type="button" class="submit-button">Retourner</button></a>
+                <button type="submit" class="submit-button">S’inscrire</button>
+            </div>
+
+        </form>
     </div>
 {% endblock content %}

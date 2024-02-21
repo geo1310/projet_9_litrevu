@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="posts-page base-page">
-    <div class="icone-title">
-        <img src="{% static 'icones/icone-post.png' %}" alt="icone critique">
-        <h2>Vos posts</h2>
-    </div>
-    {% if messages %}
+    <div class="posts-page base-page">
+        <div class="icone-title">
+            <img src="{% static 'icones/icone-post.png' %}" alt="icone critique">
+            <h2>Vos posts</h2>
+        </div>
+        {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
@@ -14,61 +14,61 @@
             </ul>
         {% endif %}
         {% for post in posts %}
-                {% if post.ticket %}
-                    <div class="post-review">
-                        <div class="title-date">
-                            <div class="post-icone">
-                                <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
-                                Vous avez publié une critique
-                            </div>
-                            {{ post.time_created }}
+            {% if post.ticket %}
+                <div class="post-review">
+                    <div class="title-date">
+                        <div class="post-icone">
+                            <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+                            Vous avez publié une critique
                         </div>
-                        <div>
-                            <div class="star-rating">
-                                <span>{{ post.headline }}</span>
-                                <span class='stars'>
-                                    {% for star in "x"|rjust:post.rating %}
+                        {{ post.time_created }}
+                    </div>
+                    <div>
+                        <div class="star-rating">
+                            <span>{{ post.headline }}</span>
+                            <span class='stars'>
+                                {% for star in "x"|rjust:post.rating %}
                                     <img src="{% static 'icones/icone-etoile.png' %}" alt="icone etoile">
-                                    {% endfor %}
-                                </span>
-                            </div>
-                                <p class="text-description">{{ post.body }}</p>
+                                {% endfor %}
+                            </span>
                         </div>
-                        <div class="post-ticket">
-                            <div class="post-icone">
-                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
-                                <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
-                            </div>
-                            <p><strong>{{ post.ticket.title }}</strong></p>
-                            <p>{{ post.ticket.description }}</p>
-                            <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
-                        </div>
-                        <div class="connexion-button button-submit-right">
-                            <a href="{% url 'edit_review' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
-                            <a href="{% url 'delete_review' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
-                        </div>
+                        <p class="text-description">{{ post.body }}</p>
                     </div>
-                {% else %}
                     <div class="post-ticket">
-                        <div class="title-date">
-                            <div class="post-icone">
-                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
-                                Vous avez publié un ticket
-                            </div>
-                            {{ post.time_created }}
+                        <div class="post-icone">
+                            <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                            <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
                         </div>
-                        <p><strong>{{ post.title }}</strong></p>
-                        <p>{{ post.description }}</p>
-                        <img src="{{ post.image.url }}" alt="{{post.title}}">
-                        <div class="connexion-button button-submit-right">
-                            <a href="{% url 'edit_ticket' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
-                            <a href="{% url 'delete_ticket' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
-                        </div>
+                        <p><strong>{{ post.ticket.title }}</strong></p>
+                        <p>{{ post.ticket.description }}</p>
+                        <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
                     </div>
+                    <div class="connexion-button button-submit-right">
+                        <a href="{% url 'edit_review' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
+                        <a href="{% url 'delete_review' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="post-ticket">
+                    <div class="title-date">
+                        <div class="post-icone">
+                            <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                            Vous avez publié un ticket
+                        </div>
+                        {{ post.time_created }}
+                    </div>
+                    <p><strong>{{ post.title }}</strong></p>
+                    <p>{{ post.description }}</p>
+                    <img src="{{ post.image.url }}" alt="{{post.title}}">
+                    <div class="connexion-button button-submit-right">
+                        <a href="{% url 'edit_ticket' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
+                        <a href="{% url 'delete_ticket' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                    </div>
+                </div>
 
-                {% endif %}
-            
+            {% endif %}
+
         {% endfor %}
-    
-</div>
+
+    </div>
 {% endblock content %}

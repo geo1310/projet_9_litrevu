@@ -10,11 +10,8 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "id",
     )
-    search_fields = (
-        "username",
-    )
+    search_fields = ("username",)
 
 
 # Enregistrez votre CustomUserAdmin
 admin.site.register(CustomUser, CustomUserAdmin)
-

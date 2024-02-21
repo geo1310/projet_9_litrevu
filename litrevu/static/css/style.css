@@ -1,11 +1,11 @@
-html, body{
+html, body {
     margin: 0;
     padding: 0;
-    
+
 }
 
 html {
-    
+
     background-image: url(../images/man_made-book-library-841345.jpeg);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -14,43 +14,50 @@ html {
     justify-content: center;
 }
 
-#body{
+#body {
     width: 60%;
     opacity: 0.95;
-    font-family: Verdana, sans-serif; 
+    font-family: Verdana, sans-serif;
     font-size: 100%;
-    
+
 }
-#main{  
+
+#main {
     padding: 50px 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background-color: white;
-    
+
 }
-.p{
+
+.p {
     word-wrap: break-word;
 }
-.text-description{
+
+.text-description {
     font-size: 18px;
 }
-.text-left{
+
+.text-left {
     width: 100%;
     text-align: left;
     font-size: 18px;
     font-weight: 600;
     margin-top: 50px;
 }
-.button-submit-right{
+
+.button-submit-right {
     width: 100%;
     text-align: right;
 }
-.span-bottom{
+
+.span-bottom {
     margin-bottom: 20px;
 }
-.base-page{
+
+.base-page {
     width: 100%;
 }
 
@@ -60,29 +67,33 @@ html {
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(4, 81, 104, 0.5);
 }
-.base-page h3{
+
+.base-page h3 {
     text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
 }
-img{
+
+img {
     max-width: 200px;
     border-radius: 10px;
     margin-top: 10px;
-   
+
 }
-.icone-title{
+
+.icone-title {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
     text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
 }
-.icone-title img{
+
+.icone-title img {
     width: 100px;
     margin-right: 20px;
 }
 
 /* affichage des messages de succes et d erreurs */
 
-.messages{
+.messages {
     list-style: none;
     margin-bottom: 50px;
     font-size: 20px;
@@ -109,36 +120,43 @@ img{
     justify-content: space-between;
     align-items: center;
 }
-.titre-header{
+
+.titre-header {
     display: flex;
     align-items: center;
 }
-.titre-header h1{
+
+.titre-header h1 {
     margin: 0;
 }
+
 .nav ul {
     display: flex;
     list-style: none;
     align-items: center;
 }
+
 .nav a, .logout-button {
     text-decoration: none;
-    background: none; 
-    border: none; 
+    background: none;
+    border: none;
     color: white;
     padding: 5px 5px;
     margin-right: 10px;
     font-size: 18px;
     font-weight: 500;
 }
-.logout-form{
+
+.logout-form {
     margin: 0;
 }
-.nav a:hover, .logout-button:hover{
+
+.nav a:hover, .logout-button:hover {
     border-bottom: 4px solid #fff;
     cursor: pointer;
 
 }
+
 #header img {
     height: 100px;
     margin-right: 20px;
@@ -147,7 +165,7 @@ img{
 
 /* page login */
 
-.login-page{
+.login-page {
     width: 100%;
     padding: 20px;
     display: flex;
@@ -155,51 +173,59 @@ img{
     flex-direction: row-reverse;
 }
 
-.signup-page{
+.signup-page {
     width: 90%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.errorlist{
+
+.errorlist {
     color: red;
     list-style: none;
     margin: 30px 0;
     font-size: 20px;
 }
 
-.connexion-login{
+.connexion-login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
-.connexion-button{
+
+.connexion-button {
     text-align: end;
     margin-top: 30px;
 }
+
 .inscription-login {
     display: flex;
     flex-direction: column;
     align-items: center;
-   
+
 }
-.change-password{
+
+.change-password {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .form-field, .form-field-ticket {
-    margin-bottom: 20px; /* Espacement entre les champs */
+    margin-bottom: 20px;
+    /* Espacement entre les champs */
 }
-input:focus, select:focus, textarea:focus, #id_followed_user:focus{
+
+input:focus, select:focus, textarea:focus, #id_followed_user:focus {
     background-color: #77aad9;
     color: white;
     border-width: 0;
-    
+
 }
-.login-error{
+
+.login-error {
     margin-top: 30px;
     font-size: 20px;
     text-align: center;
@@ -222,15 +248,17 @@ select {
     border-radius: 10px;
     box-shadow: 1px 1px 5px lightgrey;
     border: 1px solid lightgrey;
-    
-    
+
+
 }
-select{
+
+select {
     padding: 10px 50px;
     border-radius: 5px;
     box-shadow: 1px 1px 5px black;
 }
-.submit-button{
+
+.submit-button {
     padding: 10px 30px;
     background-color: #77aad9;
     color: white;
@@ -238,34 +266,40 @@ select{
     border: none;
     border-radius: 10px;
 }
-.submit-button:hover{
+
+.submit-button:hover {
     cursor: pointer;
     background-color: #e0cdb4;
     color: black;
     box-shadow: 0 0 50px #dfaf70;
 }
-.review-form{
+
+.review-form {
     width: 60%;
 }
+
 /* page follows */
 
-.follows-form{
+.follows-form {
     display: flex;
     flex-direction: row;
-    justify-content:center;
+    justify-content: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
-#id_followed_user{
+
+#id_followed_user {
     margin-right: 50px;
     background-color: #fff;
     border: 1px solid lightgray;
     box-shadow: 5px 5px 20px lightgrey;
 }
-.form-field-follows{
+
+.form-field-follows {
     margin-right: 30px;
 }
-.follows-button{
+
+.follows-button {
     margin-left: 50px;
     text-decoration: none;
     background-color: #77aad9;
@@ -275,13 +309,15 @@ select{
     text-align: center;
     color: white;
 }
-.follows-button:hover{
+
+.follows-button:hover {
     cursor: pointer;
     background-color: #e0cdb4;
     color: black;
     box-shadow: 0 0 50px #dfaf70;
 }
-.follows-page{
+
+.follows-page {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -289,7 +325,7 @@ select{
     align-items: center;
 }
 
-.following, .followers{
+.following, .followers {
     width: 90%;
     padding: 20px;
     margin-bottom: 50px;
@@ -297,7 +333,8 @@ select{
     border: 2px solid lightgrey;
     box-shadow: 8px 8px 30px lightgrey;
 }
-.follows-item{
+
+.follows-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -312,11 +349,11 @@ select{
 
 /* page ticket */
 
-.ticket-page, .review-page, .posts-page, .flux-page{
+.ticket-page, .review-page, .posts-page, .flux-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 .form-field-ticket input[type="text"],
@@ -330,26 +367,27 @@ select{
     box-shadow: 5px 5px 20px lightgrey;
     border-width: 0;
 }
-.form-field-ticket textarea{
+
+.form-field-ticket textarea {
     font-size: 20px;
 }
 
 /* page de suppression ticket */
 
-.ticket-delete{
+.ticket-delete {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px 0; 
+    margin: 50px 0;
 }
 
-.ticket-img{
+.ticket-img {
     margin: 30px 0;
 }
 
 /* page review */
 
-.ticket-display{
+.ticket-display {
     width: 60%;
     border: 1px solid lightgrey;
     border-radius: 10px;
@@ -357,23 +395,25 @@ select{
     padding: 20px;
     margin: 30px 0;
 }
-.ticket-display-title{
+
+.ticket-display-title {
     display: flex;
     justify-content: space-between;
     margin: 0;
 }
 
-.review-texte{
+.review-texte {
     width: 80%;
     margin-top: 20px;
 }
 
-#id_rating{
+#id_rating {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
-.ticket-section, .review-section{
+
+.ticket-section, .review-section {
     padding: 0 20px 20px 20px;
     margin-bottom: 30px;
     border: 1px solid lightgrey;
@@ -383,7 +423,7 @@ select{
 
 /* page posts */
 
-.post-ticket, .post-review{
+.post-ticket, .post-review {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -396,7 +436,7 @@ select{
 }
 
 
-.title-date{
+.title-date {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -405,27 +445,32 @@ select{
     font-weight: 600;
     margin-bottom: 20px;
 }
-.post-icone{
+
+.post-icone {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
-.post-icone img{
+
+.post-icone img {
     width: 70px;
     margin-right: 10px;
-    
+
 }
-.star-rating{
+
+.star-rating {
     display: flex;
     align-items: center;
     font-size: 22px;
     font-weight: 600;
 }
-.star-rating img{
+
+.star-rating img {
     width: 20px;
 }
-.stars{
+
+.stars {
     margin-left: 30px;
 }
 
@@ -438,117 +483,139 @@ select{
     justify-content: center;
     height: 100px;
     background-color: #478ac9;
-    color: #fff; 
+    color: #fff;
     padding: 10px 0;
 }
-.logo-footer{
+
+.logo-footer {
     height: 80px;
 }
 
 /* Responsive */
 
 @media all and (max-width: 1120px) {
-    #body{
+    #body {
         width: 100vw;
         margin: 0;
         padding: 0;
     }
+
     /* Style pour le header */
     #header {
         text-align: center;
         height: 150px;
     }
-    #header img{
+
+    #header img {
         height: 70px;
     }
-    #header h1{
+
+    #header h1 {
         font-size: 22px;
     }
+
     .titre-header {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 20px;
     }
-    .login-page{
+
+    .login-page {
         flex-direction: column;
     }
-    .logo-header-litrevu{
+
+    .logo-header-litrevu {
         margin-bottom: 10px;
     }
-    
-    
+
+
 }
 
 @media all and (max-width: 700px) {
-    
-    .connexion-button{
+
+    .connexion-button {
         height: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
     }
-    form{
+
+    form {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
-    .ticket-display{
+
+    .ticket-display {
         width: 90%;
     }
-    .ticket-display-title{
-        flex-direction:column-reverse;
-    }
-    .ticket-section, .review-section{
-        width: auto;
-    }
-    .title-date{
+
+    .ticket-display-title {
         flex-direction: column-reverse;
     }
-    
-    .review-form{
+
+    .ticket-section, .review-section {
+        width: auto;
+    }
+
+    .title-date {
+        flex-direction: column-reverse;
+    }
+
+    .review-form {
         width: 90vw;
         padding: 20px 0;
     }
-    .form-field{
+
+    .form-field {
         width: 80%;
     }
-    .form-field-ticket, textarea{
+
+    .form-field-ticket, textarea {
         width: 90vw;
     }
-    .star-rating{
+
+    .star-rating {
         flex-direction: column;
     }
-    .button-submit-right{
+
+    .button-submit-right {
         text-align: center;
     }
-    .nav ul{
-        
+
+    .nav ul {
+
         display: flex;
         flex-direction: column;
-        justify-content:flex-start;
+        justify-content: flex-start;
         align-items: flex-start;
     }
-    .nav li{
+
+    .nav li {
         margin-bottom: 10px;
     }
-    .nav a, .logout-button{
+
+    .nav a, .logout-button {
         font-size: 18px;
     }
-    .post-ticket, .post-review{
+
+    .post-ticket, .post-review {
         width: 80vw;
         border-radius: 10px;
         border: 3px solid lightgrey;
     }
+
     input, select {
         width: 100%;
     }
-    .icone-title img{
+
+    .icone-title img {
         width: 70px;
     }
-    .icone-title h2{
-        font-size:20px;
+
+    .icone-title h2 {
+        font-size: 20px;
     }
 }

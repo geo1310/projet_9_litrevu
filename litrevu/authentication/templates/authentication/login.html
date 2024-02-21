@@ -30,8 +30,8 @@
         </div>
     </div>
     {% if form.non_field_errors %}
-                <div class="login-error" role="alert">
-                    {{ form.non_field_errors.as_text }}
-                </div>
-        {% endif %}
+        <div class="login-error" role="alert">
+            {{ form.non_field_errors.as_text }}
+        </div>
+    {% endif %}
 {% endblock content %}

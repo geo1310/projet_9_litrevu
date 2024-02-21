@@ -7,33 +7,41 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bookreview', '0002_alter_review_body'),
+        ("bookreview", "0002_alter_review_body"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='body',
-            field=models.TextField(blank=True, max_length=8192, verbose_name='Commentaire'),
+            model_name="review",
+            name="body",
+            field=models.TextField(
+                blank=True, max_length=8192, verbose_name="Commentaire"
+            ),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='headline',
-            field=models.CharField(max_length=128, verbose_name='Titre'),
+            model_name="review",
+            name="headline",
+            field=models.CharField(max_length=128, verbose_name="Titre"),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='rating',
-            field=models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)], verbose_name='Note'),
+            model_name="review",
+            name="rating",
+            field=models.PositiveSmallIntegerField(
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+                verbose_name="Note",
+            ),
         ),
         migrations.AlterField(
-            model_name='ticket',
-            name='image',
-            field=models.ImageField(upload_to='', verbose_name='Image'),
+            model_name="ticket",
+            name="image",
+            field=models.ImageField(upload_to="", verbose_name="Image"),
         ),
         migrations.AlterField(
-            model_name='ticket',
-            name='title',
-            field=models.CharField(max_length=128, verbose_name='Titre'),
+            model_name="ticket",
+            name="title",
+            field=models.CharField(max_length=128, verbose_name="Titre"),
         ),
     ]
