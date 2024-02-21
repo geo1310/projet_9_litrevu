@@ -6,6 +6,9 @@ class UserFollowsForm(forms.ModelForm):
     class Meta:
         model = UserFollows
         fields = ["followed_user"]
+        labels = {
+            "followed_user": "Choisir utilisateur",
+        }
 
 
 class TicketForm(forms.ModelForm):
