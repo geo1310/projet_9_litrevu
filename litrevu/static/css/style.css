@@ -1,8 +1,29 @@
+/* Variables couleurs */
+
+:root {
+    --background-color-1: #fff;
+    --background-color-2: #478ac9;
+    --text-color-1: #333;
+    --text-color-2: #fff;
+    --text-color-3: gray;
+    --success-color: green;
+    --error-color: red;
+    --button-color: #77aad9;
+    --focus-color: #77aad9;
+    --text-shadow-1: rgba(4, 81, 104, 0.5);
+    --border-shadow-color: lightgray;
+    --button-hover-color: #e0cdb4;
+    --button-hover-halo-color: #dfaf70;
+}
+
+/* reset */
+
 html, body {
     margin: 0;
     padding: 0;
-
 }
+
+/* base */
 
 html {
 
@@ -18,7 +39,6 @@ html {
     width: 60%;
     font-family: Verdana, sans-serif;
     font-size: 100%;
-
 }
 
 #main {
@@ -27,9 +47,10 @@ html {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: white;
-
+    background-color: var(--background-color-1);
 }
+
+/* commons */
 
 .p {
     word-wrap: break-word;
@@ -61,14 +82,14 @@ html {
 }
 
 .base-page h2 {
-    color: #333;
+    color: var(--text-color-1);
     font-size: 32px;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(4, 81, 104, 0.5);
+    text-shadow: 2px 2px 4px var(--text-shadow-1);
 }
 
 .base-page h3 {
-    text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
+    text-shadow: 1px 1px 1px var(--text-shadow-1);
 }
 
 img {
@@ -82,7 +103,7 @@ img {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
-    text-shadow: 1px 1px 1px rgba(4, 81, 104, 0.5);
+    text-shadow: 1px 1px 1px var(--text-shadow-1);
 }
 
 .icone-title img {
@@ -100,19 +121,19 @@ img {
 }
 
 .messages li.success {
-    color: green;
+    color: var(--success-color);
 }
 
 .messages li.error {
-    color: red;
+    color: var(--error-color);
 }
 
 
 /* Header */
 
 #header {
-    background-color: #478ac9;
-    color: white;
+    background-color: var(--background-color-2);
+    color: var(--text-color-2);
     height: 100px;
     padding: 30px;
     display: flex;
@@ -139,7 +160,7 @@ img {
     text-decoration: none;
     background: none;
     border: none;
-    color: white;
+    color: var(--text-color-2);
     padding: 5px 5px;
     margin-right: 10px;
     font-size: 18px;
@@ -151,7 +172,7 @@ img {
 }
 
 .nav a:hover, .logout-button:hover {
-    border-bottom: 4px solid #fff;
+    border-bottom: 4px solid var(--text-color-2);
     cursor: pointer;
 
 }
@@ -181,7 +202,7 @@ img {
 }
 
 .errorlist {
-    color: red;
+    color: var(--error-color);
     list-style: none;
     margin: 30px 0;
     font-size: 20px;
@@ -218,8 +239,8 @@ img {
 }
 
 input:focus, select:focus, textarea:focus, #id_followed_user:focus {
-    background-color: #77aad9;
-    color: white;
+    background-color: var(--focus-color);
+    color: var(--text-color-2);
     border-width: 0;
 
 }
@@ -228,7 +249,7 @@ input:focus, select:focus, textarea:focus, #id_followed_user:focus {
     margin-top: 30px;
     font-size: 20px;
     text-align: center;
-    color: red;
+    color: var(--error-color);
 }
 
 
@@ -245,20 +266,20 @@ select {
     padding: 10px;
     font-size: 20px;
     border-radius: 10px;
-    box-shadow: 1px 1px 5px lightgrey;
-    border: 1px solid lightgrey;
+    box-shadow: 1px 1px 5px var(--border-shadow-color);
+    border: 1px solid var(--border-shadow-color);
 }
 
 select {
     padding: 10px 50px;
     border-radius: 5px;
-    box-shadow: 1px 1px 5px black;
+    box-shadow: 1px 1px 5px var(--border-shadow-color);
 }
 
 .submit-button {
     padding: 10px 30px;
-    background-color: #77aad9;
-    color: white;
+    background-color: var(--button-color);
+    color: var(--text-color-2);
     font-weight: 600;
     font-size: 18px;
     border: none;
@@ -267,9 +288,9 @@ select {
 
 .submit-button:hover {
     cursor: pointer;
-    background-color: #e0cdb4;
-    color: black;
-    box-shadow: 0 0 50px #dfaf70;
+    background-color: var(--button-hover-color);
+    color: var(--text-color-1);
+    box-shadow: 0 0 50px var(--button-hover-halo-color);
 }
 
 .review-form {
@@ -289,26 +310,26 @@ select {
 #id_followed_user {
     margin-right: 50px;
     background-color: #fff;
-    border: 1px solid lightgray;
-    box-shadow: 5px 5px 20px lightgrey;
+    border: 1px solid var(--border-shadow-color);
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
 }
 
 .follows-button {
     margin-left: 50px;
     text-decoration: none;
-    background-color: #77aad9;
+    background-color: var(--button-color);
     height: 100%;
     padding: 5px 10px;
     border-radius: 10px;
     text-align: center;
-    color: white;
+    color: var(--text-color-2);
 }
 
 .follows-button:hover {
     cursor: pointer;
-    background-color: #e0cdb4;
+    background-color: var(--button-hover-color);
     color: black;
-    box-shadow: 0 0 50px #dfaf70;
+    box-shadow: 0 0 50px var(--button-hover-halo-color);
 }
 
 .follows-page {
@@ -324,8 +345,8 @@ select {
     padding: 20px;
     margin-bottom: 50px;
     border-radius: 10px;
-    border: 2px solid lightgrey;
-    box-shadow: 8px 8px 30px lightgrey;
+    border: 2px solid var(--border-shadow-color);
+    box-shadow: 8px 8px 30px var(--border-shadow-color);
 }
 
 .follows-item {
@@ -333,8 +354,8 @@ select {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-    border: 1px solid lightgray;
-    box-shadow: 5px 5px 20px lightgrey;
+    border: 1px solid var(--border-shadow-color);
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
     padding: 10px;
     border-radius: 10px;
     font-size: 18px;
@@ -358,7 +379,7 @@ select {
     padding: 10px;
     box-sizing: border-box;
     border-radius: 10px;
-    box-shadow: 5px 5px 20px lightgrey;
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
     border-width: 0;
 }
 
@@ -383,9 +404,9 @@ select {
 
 .ticket-display {
     width: 60%;
-    border: 1px solid lightgrey;
+    border: 1px solid var(--border-shadow-color);
     border-radius: 10px;
-    box-shadow: 5px 5px 20px lightgray;
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
     padding: 20px;
     margin: 30px 0;
 }
@@ -410,9 +431,9 @@ select {
 .ticket-section, .review-section {
     padding: 0 20px 20px 20px;
     margin-bottom: 30px;
-    border: 1px solid lightgrey;
+    border: 1px solid var(--border-shadow-color);
     border-radius: 10px;
-    box-shadow: 5px 5px 20px lightgray;
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
 }
 
 /* page posts */
@@ -423,10 +444,10 @@ select {
     align-items: center;
     width: 70%;
     margin-top: 40px;
-    border: 1px solid lightgrey;
+    border: 1px solid var(--border-shadow-color);
     padding: 20px 20px 40px 20px;
     border-radius: 10px;
-    box-shadow: 5px 5px 20px lightgray;
+    box-shadow: 5px 5px 20px var(--border-shadow-color);
 }
 
 
@@ -435,7 +456,7 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: grey;
+    color: var(--text-color-3);
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -476,8 +497,8 @@ select {
     align-items: center;
     justify-content: center;
     height: 100px;
-    background-color: #478ac9;
-    color: #fff;
+    background-color: var(--background-color-2);
+    color: var(--text-color-2);
     padding: 10px 0;
 }
 
@@ -580,7 +601,6 @@ select {
     }
 
     .nav ul {
-
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -598,7 +618,7 @@ select {
     .post-ticket, .post-review {
         width: 80vw;
         border-radius: 10px;
-        border: 3px solid lightgrey;
+        border: 3px solid var(--border-shadow-color);
     }
 
     input, select {
@@ -613,8 +633,8 @@ select {
     .icone-title h2 {
         font-size: 20px;
     }
-    .follows-form{
-        
+
+    .follows-form {
         align-items: flex-end;
     }
 }
