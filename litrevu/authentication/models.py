@@ -1,4 +1,6 @@
-from django.contrib.auth.models import AbstractUser  # Importation du modèle d'utilisateur abstrait de Django
+from django.contrib.auth.models import (
+    AbstractUser,
+)  # Importation du modèle d'utilisateur abstrait de Django
 
 
 class CustomUser(AbstractUser):
@@ -18,4 +20,5 @@ class CustomUser(AbstractUser):
         is_staff: Indique si l'utilisateur est membre du personnel ou non.
         is_superuser: Indique si l'utilisateur a tous les droits de l'administrateur ou non.
     """
+
     pass

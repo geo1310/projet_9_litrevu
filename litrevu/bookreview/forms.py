@@ -14,6 +14,7 @@ class UserFollowsForm(forms.ModelForm):
             fields: Champs du formulaire à afficher.
             labels: Étiquettes personnalisées pour les champs du formulaire.
     """
+
     class Meta:
         model = UserFollows
         fields = ["followed_user"]
@@ -33,6 +34,7 @@ class TicketForm(forms.ModelForm):
             model: Modèle associé au formulaire.
             fields: Champs du formulaire à afficher.
     """
+
     # champ caché
     edit_ticket = forms.BooleanField(
         widget=forms.HiddenInput, initial=True, required=False
@@ -52,6 +54,7 @@ class DeleteTicketForm(forms.Form):
     Attributes:
         delete_ticket: Champ booléen caché pour marquer le ticket à supprimer.
     """
+
     # champ caché
     delete_ticket = forms.BooleanField(
         widget=forms.HiddenInput, initial=True, required=False

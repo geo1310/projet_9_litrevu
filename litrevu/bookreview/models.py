@@ -1,4 +1,7 @@
-from django.core.validators import MinValueValidator, MaxValueValidator  # Importation des validateurs
+from django.core.validators import (
+    MinValueValidator,
+    MaxValueValidator,
+)  # Importation des validateurs
 from django.conf import settings  # Importation des paramètres du projet Django
 from django.db import models  # Importation des modèles Django
 
@@ -14,6 +17,7 @@ class Ticket(models.Model):
         image (ImageField): Champ pour télécharger une image liée au ticket.
         time_created (DateTimeField): Date et heure de création du ticket.
     """
+
     title = models.CharField(max_length=128, verbose_name="Titre")
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -43,6 +47,7 @@ class Review(models.Model):
         user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour associer la critique à un utilisateur.
         time_created (DateTimeField): Date et heure de création de la critique.
     """
+
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)], verbose_name="Note"
@@ -64,6 +69,7 @@ class UserFollows(models.Model):
         user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour représenter l'utilisateur qui suit.
         followed_user (ForeignKey): Clé étrangère vers le modèle d'utilisateur pour représenter l'utilisateur suivi.
     """
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="following"
     )

@@ -16,5 +16,5 @@ class CustomUserAdmin(UserAdmin):
 
 
 # Enregistrement des classes d'administration personnalisées pour chaque modèle
-    
+
 admin.site.register(CustomUser, CustomUserAdmin)
