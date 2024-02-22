@@ -50,7 +50,7 @@ html {
     background-color: var(--background-color-1);
 }
 
-/* commons */
+/* styles communs */
 
 .p {
     word-wrap: break-word;
@@ -307,6 +307,7 @@ select {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -318,22 +319,19 @@ select {
     box-shadow: 5px 5px 20px var(--border-shadow-color);
 }
 
-.follows-button {
+.follow-button, .unfollow-button {
     margin-left: 50px;
     text-decoration: none;
     background-color: var(--button-color);
     height: 100%;
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 10px;
     text-align: center;
     color: var(--text-color-2);
 }
 
-.follows-button:hover {
-    cursor: pointer;
-    background-color: var(--button-hover-color);
-    color: black;
-    box-shadow: 0 0 50px var(--button-hover-halo-color);
+.follow-button{
+    padding: 15px 40px;
 }
 
 .follows-page {
@@ -551,6 +549,10 @@ select {
 }
 
 @media all and (max-width: 700px) {
+
+    .submit-button{
+        font-size: 14px;
+    }
 
     .connexion-button {
         height: 100px;

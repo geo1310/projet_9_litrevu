@@ -50,7 +50,11 @@
                         <div class="post-icone">
                             <div class="post-icone-title">
                                 <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
-                                <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
+                                {% if post.ticket.user != request.user %}
+                                    <strong>Ticket - {{ post.ticket.user }}</strong>
+                                {% else %}
+                                    <strong>Votre Ticket</strong>
+                                {% endif %}
                             </div>
                             <span>{{ post.ticket.time_created }}</span>
                         </div>

@@ -2,20 +2,27 @@ from django.shortcuts import (
     render,
     redirect,
 )  # Importation des fonctions de rendu et de redirection
+
 from django.contrib.auth.decorators import (
     login_required,
 )  # Décorateur pour vérifier si l'utilisateur est connecté
+
 from django.http import (
     HttpResponseForbidden,
 )  # Importation de la réponse HTTP pour les interdictions
+
 from django.shortcuts import (
     get_object_or_404,
 )  # Fonction pour obtenir un objet ou renvoyer une erreur 404
+
 from django.contrib import messages  # Module pour gérer les messages flash
+
 from django.utils import timezone  # Importation pour manipuler les dates et heures
+
 from django.core.files.storage import (
     default_storage,
 )  # Stockage par défaut pour gérer les fichiers
+
 from django.db import (
     IntegrityError,
 )  # Importation pour gérer les erreurs d'intégrité de la base de données

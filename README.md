@@ -34,8 +34,17 @@ Vous pouvez vous référer aux documents du projet dans le dossier docs
 
 ## Usage
 
-Le projet est fourni avec une base de données exemple avec 3 utilisateurs
+* Le projet est fourni avec une base de données exemple avec 3 utilisateurs :
+    * __name :__ user1 __password :__ litrevu1
+    * __name :__ user2 __password :__ litrevu2
+    * __name :__ user3 __password :__ litrevu3
+* Un super utilsateur : 
+    * __name :__ superuser1 __password :__ superuser1
+
+
+
 pour la tester lancer simplement le serveur de developpement
+
 
 Exécutez la commande suivante pour lancer le serveur de développement :
 
@@ -48,6 +57,12 @@ Si vous voulez partir de zéro, effacer le fichier de la base `db.sqlite3` dans 
 ```bash
 python manage.py migrate
 ```
+Créer un super utilisateur pour utiliser l'interface d'administartion :
+
+```bash
+python manage.py createsuperuser
+```
+
 Puis lancer le serveur
 
 ```bash
