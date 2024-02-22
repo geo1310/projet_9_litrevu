@@ -3,15 +3,15 @@
 # LITRevu
 
 ### Installation et activation de l'environnement Virtuel
-Ouvrez un nouveau terminal et taper  
+Ouvrez un nouveau terminal et taper : 
 ```bash
 python -m venv .env-projet9-litrevu
 ```
-Selectionner l'environnement virtuel dans visual studio code ou l'activer en se plaçant dans le dossier **.env-litrevu/scripts** et taper
+Selectionner l'environnement virtuel dans visual studio code ou l'activer en se plaçant dans le dossier **.env-litrevu/scripts** et taper : 
 ```bash
 ./activate
 ```
-Installer les dependances necessaires au projet si requirements.txt est présent
+Installer les dependances necessaires au projet : 
 ```bash
 pip install -r requirements.txt
 ```
@@ -27,21 +27,46 @@ Notre nouvelle application permet de demander ou publier des critiques de livres
 2. la demande des critiques sur un livre ou sur un article particulier ;
 3. la recherche d’articles et de livres intéressants à lire, en se basant sur les critiques des autres.
 
+Vous pouvez vous référer aux documents du projet dans le dossier docs
 
+* __[Localiser le dossier docs](litrevu/docs/)__
+* __[Consulter le cahier des charges](litrevu/docs/Cahier_des_charges.pdf)__
 
+## Usage
 
-Lancer le serveur de développement :
+Le projet est fourni avec une base de données exemple avec 3 utilisateurs
+pour la tester lancer simplement le serveur de developpement
+
 Exécutez la commande suivante pour lancer le serveur de développement :
 
 ```bash
 python manage.py runserver
 ```
 
-le serveur de développement a démarré à l'adresse http://127.0.0.1:8000/
+Si vous voulez partir de zéro, effacer le fichier de la base `db.sqlite3` dans le dossier du projet et créer une base vierge en applicant les migrations :
+
+```bash
+python manage.py migrate
+```
+Puis lancer le serveur
+
+```bash
+python manage.py runserver
+```
+
+
+le serveur de développement démarre à l'adresse http://127.0.0.1:8000/ et vous arrivez sur la page de connexion
+
+Vous pouvez consulter le cahier des charges pour le détail des fonctionnalité :
+
+* __[Consulter le cahier des charges](litrevu/docs/Cahier_des_charges.pdf)__
  
 ---
-### Vérification du Code : 
+## Vérification du Code : 
 
+Le code a été formaté avec __black__ pour le python, __djhtml__ pour le django html et __css formatter__ pour le css
+
+---
 #### Procédure pour générer un rapport flake8 en HTML
 
 
@@ -50,5 +75,13 @@ Dans le terminal dans le dossier du projet , tapez la commande suivante pour aff
 flake8 --format=html --htmldir=rapports_flake8 --exclude=.env-projet9-litrevu
 ```
 Le rapport sera sauvegardé dans le dossier rapports_flake8, il suffira de lancer le fichier index.html
+
+## Contribuer
+
+Si vous souhaitez contribuer à ce projet, veuillez suivre ces étapes :
+
+    Ouvrez un problème pour discuter de ce que vous souhaitez changer.
+    Fork ce dépôt et créez une branche pour votre contribution.
+    Soumettez une demande d'extraction avec vos modifications.
 
 
