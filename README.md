@@ -43,7 +43,7 @@ Vous pouvez vous référer aux documents du projet dans le dossier docs
 
 
 
-pour la tester lancer simplement le serveur de developpement
+pour la tester lancer simplement le serveur de developpement en se placant dans le dossier du projet `litrevu`
 
 
 Exécutez la commande suivante pour lancer le serveur de développement :
@@ -72,14 +72,15 @@ python manage.py runserver
 
 le serveur de développement démarre à l'adresse http://127.0.0.1:8000/ et vous arrivez sur la page de connexion
 
-Vous pouvez consulter le cahier des charges pour le détail des fonctionnalité :
+Vous pouvez consulter le cahier des charges pour le détail des fonctionnalités :
 
 * __[Consulter le cahier des charges](litrevu/docs/Cahier_des_charges.pdf)__
  
 ---
 ## Vérification du Code : 
 
-Le code a été formaté avec __black__ pour le python, __djhtml__ pour le django html et __css formatter__ pour le css
+Le code a été formaté avec __black__ pour le python, __djhtml__ pour le django html et __css formatter__ pour le css 
+et il respecte les recommandations pep8
 
 ---
 #### Procédure pour générer un rapport flake8 en HTML

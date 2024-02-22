@@ -1,11 +1,14 @@
 from django.contrib import admin
+
 from django.urls import (
     path,
     include,
 )  # Importation de fonctions nécessaires pour définir les URL
+
 from django.conf import (
     settings,
 )  # Importation des paramètres de configuration de Django
+
 from django.conf.urls.static import (
     static,
 )  # Importation pour servir les fichiers statiques en développement

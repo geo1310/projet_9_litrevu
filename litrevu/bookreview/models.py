@@ -2,7 +2,9 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator,
 )  # Importation des validateurs
+
 from django.conf import settings  # Importation des paramètres du projet Django
+
 from django.db import models  # Importation des modèles Django
 
 

@@ -1,6 +1,7 @@
 from django.urls import (
     path,
 )  # Importation de fonctions nécessaires pour définir les URL
+
 import bookreview.views
 
 urlpatterns = [

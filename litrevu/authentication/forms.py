@@ -1,6 +1,7 @@
 from django.contrib.auth import (
     get_user_model,
 )  # Importation de la fonction pour obtenir le modèle utilisateur
+
 from django.contrib.auth.forms import (
     UserCreationForm,
 )  # Importation du formulaire de création d'utilisateur
