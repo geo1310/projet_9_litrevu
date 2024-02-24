@@ -34,7 +34,7 @@ Ouvrez un nouveau terminal et taper :
 ```bash
 python -m venv .env-projet9-litrevu
 ```
-Selectionner l'environnement virtuel dans visual studio code ou l'activer en se plaçant dans le dossier **.env-litrevu/scripts** et taper : 
+Selectionner l'environnement virtuel dans visual studio code ou l'activer en se plaçant dans le dossier **.env-projet9-litrevu/scripts** et taper : 
 ```bash
 ./activate
 ```

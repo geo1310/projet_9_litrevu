@@ -200,7 +200,8 @@ html {
 }
 
 .nav a:hover, .logout-button:hover {
-    border-bottom: 4px solid var(--text-color-2);
+    border-bottom: 4px solid var(--button-hover-color);
+    color: var(--button-hover-color);
     cursor: pointer;
 }
 
