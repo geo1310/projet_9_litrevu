@@ -1,6 +1,5 @@
-from django.urls import path
-
 import bookreview.views
+from django.urls import path
 
 urlpatterns = [
     path("flux/", bookreview.views.flux, name="flux"),

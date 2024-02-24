@@ -126,9 +126,7 @@ def delete_ticket(request, ticket_id):
     # Vérifie que l'utilisateur est autorisé à supprimer l'objet
     if ticket.user != request.user:
 
-        return HttpResponseForbidden(
-            COMMON_IMPORTS["unauthorized_msg"]
-        )
+        return HttpResponseForbidden(COMMON_IMPORTS["unauthorized_msg"])
 
     try:
         # Supprime le fichier image associé au ticket s'il existe
@@ -324,9 +322,7 @@ def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
 
     if review.user != request.user:
-        return HttpResponseForbidden(
-            COMMON_IMPORTS["unauthorized_msg"]
-        )
+        return HttpResponseForbidden(COMMON_IMPORTS["unauthorized_msg"])
 
     try:
         review.delete()
@@ -434,9 +430,7 @@ def follows_delete(request, follows_id):
     # Vérifie que l'utilisateur est autorisé à supprimer l'objet
     if follow.user != request.user:
 
-        return HttpResponseForbidden(
-            COMMON_IMPORTS["unauthorized_msg"]
-        )
+        return HttpResponseForbidden(COMMON_IMPORTS["unauthorized_msg"])
 
     try:
         follow.delete()

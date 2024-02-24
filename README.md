@@ -92,8 +92,10 @@ Vous pouvez consulter le cahier des charges pour le détail des fonctionnalités
 ---
 ## Vérification du Code : 
 
-Le code a été formaté avec __black__ pour le python, __djhtml__ pour le django html et __css formatter__ pour le css 
-et il respecte les recommandations pep8
+* Le code a été formaté avec `black` pour le python, `djhtml` pour le django html et `css formatter` pour le css 
+et il respecte les recommandations pep8.
+
+* Utilisation de `isort` pour l'organisation des imports et de `pycln` pour le pep8.
 
 ---
 #### Procédure pour générer un rapport flake8 en HTML
