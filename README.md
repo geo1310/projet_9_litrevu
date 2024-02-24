@@ -1,8 +1,35 @@
-![image](./litrevu/static/images/LITrevu_banner.png)
+![image](./docs/images/LITrevu_banner.png)
 
 # LITRevu
 
-### Installation et activation de l'environnement Virtuel
+
+![Python](https://img.shields.io/badge/python-3.11.x-green.svg)
+![Django](https://img.shields.io/badge/django-5.0.2.x-green.svg)
+
+[![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![Flake8](https://img.shields.io/badge/flake8-checked-blueviolet)](https://flake8.pycqa.org/en/latest/)
+[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Djhtml](https://img.shields.io/badge/Django-HTML-Teal)](https://(https://github.com/rtts/djhtml))
+
+![Repo Size](https://img.shields.io/github/repo-size/geo1310/projet_9_litrevu)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/projet_9_litrevu)
+
+
+Son objectif est de commercialiser un produit permettant à une communauté d'utilisateurs de publier des critiques de livres ou d’articles et de consulter ou de solliciter une critique de livres à la demande.
+
+L'application permet de demander ou publier des critiques de livres ou d’articles. L’application présente trois cas d’utilisation principaux :
+
+1. la publication des critiques de livres ou d’articles ;
+2. la demande des critiques sur un livre ou sur un article particulier ;
+3. la recherche d’articles et de livres intéressants à lire, en se basant sur les critiques des autres.
+
+Vous pouvez vous référer aux documents du projet dans le dossier docs
+
+* __[Dossier docs](docs/)__
+* __[Consulter le cahier des charges](docs/Cahier_des_charges.pdf)__
+
+
+## Installation et activation de l'environnement Virtuel
 Ouvrez un nouveau terminal et taper : 
 ```bash
 python -m venv .env-projet9-litrevu
@@ -15,22 +42,6 @@ Installer les dependances necessaires au projet :
 ```bash
 pip install -r requirements.txt
 ```
-
-
-## Projet  LITRevu
-
-Son objectif est de commercialiser un produit permettant à une communauté d'utilisateurs de publier des critiques de livres ou d’articles et de consulter ou de solliciter une critique de livres à la demande.
-
-Notre nouvelle application permet de demander ou publier des critiques de livres ou d’articles. L’application présente trois cas d’utilisation principaux :
-
-1. la publication des critiques de livres ou d’articles ;
-2. la demande des critiques sur un livre ou sur un article particulier ;
-3. la recherche d’articles et de livres intéressants à lire, en se basant sur les critiques des autres.
-
-Vous pouvez vous référer aux documents du projet dans le dossier docs
-
-* __[Localiser le dossier docs](litrevu/docs/)__
-* __[Consulter le cahier des charges](litrevu/docs/Cahier_des_charges.pdf)__
 
 ## Usage
 
@@ -72,9 +83,11 @@ python manage.py runserver
 
 le serveur de développement démarre à l'adresse http://127.0.0.1:8000/ et vous arrivez sur la page de connexion
 
+![image](./docs/images/litrevu_page_connexion.png)
+
 Vous pouvez consulter le cahier des charges pour le détail des fonctionnalités :
 
-* __[Consulter le cahier des charges](litrevu/docs/Cahier_des_charges.pdf)__
+* __[Consulter le cahier des charges](docs/Cahier_des_charges.pdf)__
  
 ---
 ## Vérification du Code : 

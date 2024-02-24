@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import UserFollows, Ticket, Review
 
 
@@ -35,7 +36,7 @@ class TicketForm(forms.ModelForm):
             fields: Champs du formulaire à afficher.
     """
 
-    # champ caché
+    # champ caché ( utile si utilisation de plusieurs formulaires avec une seule requete POST)
     edit_ticket = forms.BooleanField(
         widget=forms.HiddenInput, initial=True, required=False
     )
@@ -55,7 +56,7 @@ class DeleteTicketForm(forms.Form):
         delete_ticket: Champ booléen caché pour marquer le ticket à supprimer.
     """
 
-    # champ caché
+    # champ caché ( utile si utilisation de plusieurs formulaires avec une seule requete POST)
     delete_ticket = forms.BooleanField(
         widget=forms.HiddenInput, initial=True, required=False
     )

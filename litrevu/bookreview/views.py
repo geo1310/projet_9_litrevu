@@ -1,7 +1,7 @@
 from django.shortcuts import (
     render,
     redirect,
-)  # Importation des fonctions de rendu et de redirection
+)
 
 from django.contrib.auth.decorators import (
     login_required,
@@ -13,11 +13,11 @@ from django.http import (
 
 from django.shortcuts import (
     get_object_or_404,
-)  # Fonction pour obtenir un objet ou renvoyer une erreur 404
+)
 
 from django.contrib import messages  # Module pour gérer les messages flash
 
-from django.utils import timezone  # Importation pour manipuler les dates et heures
+from django.utils import timezone
 
 from django.core.files.storage import (
     default_storage,
@@ -52,15 +52,18 @@ def create_ticket(request):
 
     ticket_form = TicketForm()
     if request.method == "POST":
+
         ticket_form = TicketForm(request.POST, request.FILES)
+
         if ticket_form.is_valid():
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
 
             return redirect("flux")
+
         else:
-            # Afficher les erreurs de validation du formulaire
+            # Affiche les erreurs de validation du formulaire
             for field, errors in ticket_form.errors.items():
                 for error in errors:
                     messages.error(request, f"Erreur dans le champ '{field}': {error}")
@@ -95,9 +98,11 @@ def edit_ticket(request, ticket_id):
     if request.method == "POST":
 
         edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
+
         if edit_form.is_valid():
             ticket.time_created = timezone.now()
             edit_form.save()
+
             messages.success(
                 request, f"Le Ticket {ticket.title} a été modifié avec succès."
             )
@@ -140,11 +145,10 @@ def delete_ticket(request, ticket_id):
         )
 
     try:
-        # Supprimer le fichier image associé au ticket s'il existe
+        # Supprime le fichier image associé au ticket s'il existe
         if ticket.image:
-            # Obtenir le chemin du fichier
+
             file_path = ticket.image.path
-            # Supprimer le fichier
             default_storage.delete(file_path)
 
         ticket.delete()
@@ -152,14 +156,16 @@ def delete_ticket(request, ticket_id):
         messages.success(
             request, f"Le Ticket {ticket.title} a été supprimé avec succès."
         )
+
     except IntegrityError as e:
-        # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
+        # Gére les erreurs spécifiques liées à l'intégrité de la base de données
         messages.error(
             request,
             f"Une erreur d'intégrité de la base de données s'est produite : {e}",
         )
+
     except Exception as e:
-        # Gérer les autres exceptions génériques
+        # Gére les autres exceptions génériques
         messages.error(
             request,
             f"Une erreur s'est produite lors de la suppression de l'objet : {e}",
@@ -173,11 +179,30 @@ def delete_ticket(request, ticket_id):
 
 @login_required
 def create_review(request):
+    """
+    Crée une nouvelle critique.
+
+    Cette vue permet aux utilisateurs connectés de créer une nouvelle critique.
+    Si une méthode POST est utilisée, les données du formulaire sont validées.
+    Si les formulaires de critique et de ticket sont valides, une nouvelle critique
+    est créée et associée à un nouveau ticket, puis l'utilisateur est redirigé
+    vers la page de flux.
+
+    Args:
+        request (HttpRequest): L'objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+        HttpResponse: Renvoie le rendu de la page de création de critique avec les formulaires.
+
+    """
+
     review_form = ReviewForm()
     ticket_form = TicketForm()
+
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
         ticket_form = TicketForm(request.POST, request.FILES)
+
         if all([review_form.is_valid(), ticket_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
@@ -186,14 +211,17 @@ def create_review(request):
             review.user = request.user
             review.ticket = ticket
             review.save()
+
             return redirect("flux")
+
         else:
-            # Afficher les erreurs de validation du formulaire
+            # Affiche les erreurs de validation du formulaire
             for field, errors in review_form.errors.items():
                 for error in errors:
                     messages.error(request, f"Erreur dans le champ '{field}': {error}")
 
     context = {"review_form": review_form, "ticket_form": ticket_form}
+
     return render(request, "bookreview/create_review.html", context=context)
 
 
@@ -216,16 +244,20 @@ def create_review_ticket(request, ticket_id):
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
     review_form = ReviewForm()
+
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
+
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
             review.ticket = ticket
             review.save()
+
             return redirect("flux")
+
         else:
-            # Afficher les erreurs de validation du formulaire
+            # Affiche les erreurs de validation du formulaire
             for field, errors in review_form.errors.items():
                 for error in errors:
                     messages.error(request, f"Erreur dans le champ '{field}': {error}")
@@ -234,6 +266,7 @@ def create_review_ticket(request, ticket_id):
         "ticket": ticket,
         "review_form": review_form,
     }
+
     return render(request, "bookreview/create_review_ticket.html", context=context)
 
 
@@ -258,17 +291,22 @@ def edit_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     edit_form = ReviewForm(instance=review)
     ticket = review.ticket
+
     if request.method == "POST":
         edit_form = ReviewForm(request.POST, instance=review)
+
         if edit_form.is_valid():
             review.time_created = timezone.now()
             edit_form.save()
+
             messages.success(
                 request, f"La Critique {review.ticket} a été modifié avec succès."
             )
+
             return redirect("posts")
+
         else:
-            # Afficher les erreurs de validation du formulaire
+            # Affiche les erreurs de validation du formulaire
             for field, errors in edit_form.errors.items():
                 for error in errors:
                     messages.error(request, f"Erreur dans le champ '{field}': {error}")
@@ -277,6 +315,7 @@ def edit_review(request, review_id):
         "edit_form": edit_form,
         "ticket": ticket,
     }
+
     return render(request, "bookreview/edit_review.html", context=context)
 
 
@@ -308,14 +347,16 @@ def delete_review(request, review_id):
         messages.success(
             request, f"La Critique {review.ticket} a été supprimé avec succès."
         )
+
     except IntegrityError as e:
-        # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
+        # Gére les erreurs spécifiques liées à l'intégrité de la base de données
         messages.error(
             request,
             f"Une erreur d'intégrité de la base de données s'est produite : {e}",
         )
+
     except Exception as e:
-        # Gérer les autres exceptions génériques
+        # Gére les autres exceptions génériques
         messages.error(
             request,
             f"Une erreur s'est produite lors de la suppression de l'objet : {e}",
@@ -351,16 +392,19 @@ def follows(request):
 
     if request.method == "POST":
         form = UserFollowsForm(request.POST)
+
         if form.is_valid():
             try:
                 user_follow = form.save(commit=False)
                 user_follow.user = request.user
                 user_follow.save()
+
             except IntegrityError:
                 messages.error(
                     request,
                     f"L'utilisateur {user_follow.followed_user} est deja dans votre liste de suivis",
                 )
+
                 return render(
                     request,
                     "bookreview/follows.html",
@@ -411,14 +455,16 @@ def follows_delete(request, follows_id):
     try:
         follow.delete()
         messages.success(request, f"{follow.followed_user} a été supprimé avec succès.")
+
     except IntegrityError as e:
-        # Gérer les erreurs spécifiques liées à l'intégrité de la base de données
+        # Gére les erreurs spécifiques liées à l'intégrité de la base de données
         messages.error(
             request,
             f"Une erreur d'intégrité de la base de données s'est produite : {e}",
         )
+
     except Exception as e:
-        # Gérer les autres exceptions génériques
+        # Gére les autres exceptions génériques
         messages.error(
             request,
             f"Une erreur s'est produite lors de la suppression de l'objet : {e}",
@@ -490,8 +536,9 @@ def flux(request):
     # Utilisation d'un ensemble pour éviter les doublons
     posts_set = set(tickets) | set(reviews)
 
-    # récupération des posts des followers
+    # récupération des posts des followeds
     follows = UserFollows.objects.filter(user=request.user)
+
     for follow in follows:
         tickets_followed = Ticket.objects.filter(user=follow.followed_user)
         reviews_followed = Review.objects.filter(user=follow.followed_user)

@@ -36,7 +36,7 @@
                         </div>
                         <p class="text-description">{{ post.body }}</p>
                     </div>
-                    <div class="post-ticket">
+                    <div class="post-ticket-review">
                         <div class="post-icone">
                             <div class="post-icone-title">
                                 <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
@@ -45,7 +45,7 @@
                             <span>{{ post.ticket.time_created }}</span>
                         </div>
                         <p><strong>{{ post.ticket.title }}</strong></p>
-                        <p>{{ post.ticket.description }}</p>
+                        <p class="text-description">{{ post.ticket.description }}</p>
                         <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
                     </div>
                     <div class="connexion-button button-submit-right">
@@ -65,7 +65,7 @@
                         {{ post.time_created }}
                     </div>
                     <p><strong>{{ post.title }}</strong></p>
-                    <p>{{ post.description }}</p>
+                    <p class="text-description">{{ post.description }}</p>
                     <img src="{{ post.image.url }}" alt="{{post.title}}">
                     <div class="connexion-button button-submit-right">
                         {% if not post.has_review %}

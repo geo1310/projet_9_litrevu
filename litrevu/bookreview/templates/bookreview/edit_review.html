@@ -8,8 +8,11 @@
         </div>
         <div class="review-texte">Vous êtes en train de poster en réponse à</div>
         <div class="ticket-display">
-            <div class="ticket-display-title">
-                <p>{{ ticket.user }} a demandé une critique.</p>
+            <div class="title-date">
+                <div class="post-icone">
+                    <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                    <p><strong>{{ ticket.user }}</strong> a demandé une critique.</p>
+                </div>
                 <p>{{ ticket.time_created}}</p>
             </div>
             <h3>{{ ticket.title }}</h3>

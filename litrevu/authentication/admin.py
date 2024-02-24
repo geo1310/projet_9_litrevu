@@ -1,5 +1,7 @@
 from django.contrib import admin
+
 from django.contrib.auth.admin import UserAdmin
+
 from .models import CustomUser
 
 # Définition des classes d'administration personnalisées pour chaque modèle

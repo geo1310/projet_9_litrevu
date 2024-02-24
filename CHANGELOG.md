@@ -9,11 +9,7 @@
 
 # Nice to Have
 - Readme en Anglais
-- Utiliser des badges pour le readme (python django)
+- code docstring en ANGLAIS
 - Regarder ```isort```, ```pycln``` 
 - Creer un ```.utils/``` avec quelques commandes .sh ou .py 
-- moove la docs/ a la racine
-- supprimer le db useless
-- code docstring en ANGLAIS
-- nettoyer certains commentaires (?)
-- aerer un peu le code
+- supprimer le db useless ----> recherche sur la raison de sa presence ?
