@@ -1,6 +1,4 @@
-from django.urls import (
-    path,
-)
+from django.urls import path
 
 import bookreview.views
 

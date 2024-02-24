@@ -1,14 +1,8 @@
-from django.urls import (
-    path,
-)
-
 # Import des vues génériques de l'authentification
-from django.contrib.auth.views import (
-    LoginView,
-    LogoutView,
-    PasswordChangeView,
-    PasswordChangeDoneView,
-)
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordChangeDoneView,
+                                       PasswordChangeView)
+from django.urls import path
 
 import authentication.views
 

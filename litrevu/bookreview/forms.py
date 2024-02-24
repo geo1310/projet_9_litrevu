@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import UserFollows, Ticket, Review
+from .models import Review, Ticket, UserFollows
 
 
 class UserFollowsForm(forms.ModelForm):

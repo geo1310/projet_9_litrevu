@@ -431,7 +431,7 @@ select {
 
 }
 
-.post-ticket img, .post-review img, .post-ticket-review img, .ticket-display img {
+.post-ticket img, .post-review img, .post-ticket-review img, .ticket-display img, .form-field-ticket img{
     width: 250px;
 }
 

@@ -1,35 +1,21 @@
-from django.shortcuts import (
-    render,
-    redirect,
-)
-
-from django.contrib.auth.decorators import (
-    login_required,
-)  # Décorateur pour vérifier si l'utilisateur est connecté
-
-from django.http import (
-    HttpResponseForbidden,
-)  # Importation de la réponse HTTP pour les interdictions
-
-from django.shortcuts import (
-    get_object_or_404,
-)
-
 from django.contrib import messages  # Module pour gérer les messages flash
-
+from django.contrib.auth.decorators import \
+    login_required  # Décorateur pour vérifier si l'utilisateur est connecté
+from django.core.files.storage import \
+    default_storage  # Stockage par défaut pour gérer les fichiers
+from django.db import \
+    IntegrityError  # Importation pour gérer les erreurs d'intégrité de la base de données
+from django.http import \
+    HttpResponseForbidden  # Importation de la réponse HTTP pour les interdictions
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from django.core.files.storage import (
-    default_storage,
-)  # Stockage par défaut pour gérer les fichiers
+from .forms import DeleteTicketForm, ReviewForm, TicketForm, UserFollowsForm
+from .models import Review, Ticket, UserFollows
 
-from django.db import (
-    IntegrityError,
-)  # Importation pour gérer les erreurs d'intégrité de la base de données
-
-from .models import UserFollows, Ticket, Review
-from .forms import UserFollowsForm, TicketForm, DeleteTicketForm, ReviewForm
-
+COMMON_IMPORTS = {
+    "unauthorized_msg": "Vous n'êtes pas autorisé à effectuer cette action.",
+}
 
 # Ticket ---------------------------------------------------------------------
 
@@ -141,7 +127,7 @@ def delete_ticket(request, ticket_id):
     if ticket.user != request.user:
 
         return HttpResponseForbidden(
-            "Vous n'êtes pas autorisé à effectuer cette action."
+            COMMON_IMPORTS["unauthorized_msg"]
         )
 
     try:
@@ -339,7 +325,7 @@ def delete_review(request, review_id):
 
     if review.user != request.user:
         return HttpResponseForbidden(
-            "Vous n'êtes pas autorisé à effectuer cette action."
+            COMMON_IMPORTS["unauthorized_msg"]
         )
 
     try:
@@ -449,7 +435,7 @@ def follows_delete(request, follows_id):
     if follow.user != request.user:
 
         return HttpResponseForbidden(
-            "Vous n'êtes pas autorisé à effectuer cette action."
+            COMMON_IMPORTS["unauthorized_msg"]
         )
 
     try:

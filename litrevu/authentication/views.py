@@ -1,13 +1,7 @@
 from django.conf import settings
-
-from django.contrib.auth import (
-    login,
-)  # Importation de la fonction de connexion utilisateur
-
-from django.shortcuts import (
-    redirect,
-    render,
-)
+from django.contrib.auth import \
+    login  # Importation de la fonction de connexion utilisateur
+from django.shortcuts import redirect, render
 
 from . import forms
 

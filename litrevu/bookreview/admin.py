@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from bookreview.models import Ticket, Review, UserFollows
+from bookreview.models import Review, Ticket, UserFollows
 
 # Définition des classes d'administration personnalisées pour chaque modèle
 
