@@ -11,7 +11,6 @@
 - Readme en Anglais
 - code docstring en ANGLAIS
 - Creer un ```.utils/``` avec quelques commandes .sh ou .py 
-- supprimer le db useless ----> recherche sur la raison de sa presence ?
 
 # Infos
 
