@@ -3,7 +3,7 @@
 {% block content %}
     <div class="posts-page base-page">
         <div class="icone-title">
-            <img src="{% static 'icones/icone-post.png' %}" alt="icone critique">
+            <img src="{% static 'icones/icone-post.webp' %}" alt="icone critique">
             <h2>Vos posts</h2>
         </div>
         {% if messages %}
@@ -19,7 +19,7 @@
                     <div class="title-date">
                         <div class="post-icone">
                             <div class="post-icone-title">
-                                <img src="{% static 'icones/icone-review.png' %}" alt="icone critique">
+                                <img src="{% static 'icones/icone-review.webp' %}" alt="icone critique">
                                 Vous avez publié une critique
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                             <span>{{ post.headline }}</span>
                             <span class='stars'>
                                 {% for star in "x"|rjust:post.rating %}
-                                    <img src="{% static 'icones/icone-etoile.png' %}" alt="icone etoile">
+                                    <img src="{% static 'icones/icone-etoile.webp' %}" alt="icone etoile">
                                 {% endfor %}
                             </span>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="post-ticket-review">
                         <div class="post-icone">
                             <div class="post-icone-title">
-                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                <img src="{% static 'icones/icone-ticket.webp' %}" alt="icone critique">
                                 <span>Ticket - <strong>{{ post.ticket.user }}</strong></span>
                             </div>
                             <span>{{ post.ticket.time_created }}</span>
@@ -58,7 +58,7 @@
                     <div class="title-date">
                         <div class="post-icone">
                             <div class="post-icone-title">
-                                <img src="{% static 'icones/icone-ticket.png' %}" alt="icone critique">
+                                <img src="{% static 'icones/icone-ticket.webp' %}" alt="icone critique">
                                 Vous avez publié un ticket
                             </div>
                         </div>
