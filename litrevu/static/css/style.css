@@ -8,7 +8,7 @@
     --text-color-3: var(--background-color-2);
     --success-color: green;
     --error-color: red;
-    --button-color: #e7473c;
+    --button-color: #CE3F35;
     --button-text-color: var(--text-color-2);
     --focus-color: #afdff5;
     --text-shadow-1: rgba(4, 81, 104, 0.5);
@@ -31,7 +31,7 @@ html, body {
 
 html {
 
-    background-image: url(../images/man_made-book-library-841345.jpeg);
+    background-image: url(../images/man_made-book-library-841345.webp);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -391,7 +391,6 @@ select {
     width: 60%;
     background-color: var(--post-ticket);
     border: 1px solid var(--border-shadow-color);
-    border-radius: 50px;
     padding: 20px;
     margin: 30px 0;
 }
@@ -428,8 +427,7 @@ select {
     flex-direction: column;
     align-items: center;
     padding-bottom: 30px;
-    border-radius: 50px;
-
+    border-radius: 10px;
 }
 
 .post-ticket img, .post-review img, .post-ticket-review img, .ticket-display img, .form-field-ticket img{
@@ -681,7 +679,7 @@ select {
     }
 
     .nav li {
-        margin-bottom: 10px;
+        margin: 10px;
     }
 
     .nav a, .logout-button {
