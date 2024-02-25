@@ -79,6 +79,10 @@ def edit_ticket(request, ticket_id):
     """
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    # path de l image du ticket existant si elle existe
+    file_path = ticket.image.path if ticket.image else None
+
     edit_form = TicketForm(instance=ticket)
 
     if request.method == "POST":
@@ -86,6 +90,11 @@ def edit_ticket(request, ticket_id):
         edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
 
         if edit_form.is_valid():
+
+            # Vérifie si une nouvelle image a été fournie et supprime l ancienne si elle existe
+            if 'image' in request.FILES and file_path:
+                default_storage.delete(file_path)
+
             ticket.time_created = timezone.now()
             edit_form.save()
 
