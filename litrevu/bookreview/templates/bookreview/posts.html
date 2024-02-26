@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <script src="{% static 'js/script.js' %}" defer></script>
     <div class="posts-page base-page">
         <div class="icone-title">
             <img src="{% static 'icones/icone-post.webp' %}" alt="icone critique">
@@ -50,7 +51,7 @@
                     </div>
                     <div class="connexion-button button-submit-right">
                         <a href="{% url 'edit_review' post.id %}" class="submit-button">Modifier</a>
-                        <a href="{% url 'delete_review' post.id %}" class="submit-button">Supprimer</a>
+                        <a  class="submit-button delete-post" data-post-type="review" data-post-id="{{ post.id }}">Supprimer</a>
                     </div>
                 </div>
             {% else %}
@@ -71,13 +72,10 @@
                         {% if not post.has_review %}
                             <a href="{% url 'edit_ticket' post.id %}" class="submit-button">Modifier</a>
                         {% endif %}
-                        <a href="{% url 'delete_ticket' post.id %}" class="submit-button">Supprimer</a>
+                        <a class="submit-button delete-post" data-post-type="ticket" data-post-id="{{ post.id }}">Supprimer</a>
                     </div>
                 </div>
-
             {% endif %}
-
         {% endfor %}
-
     </div>
 {% endblock content %}
