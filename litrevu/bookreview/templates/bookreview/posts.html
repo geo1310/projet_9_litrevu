@@ -49,8 +49,8 @@
                         <img src="{{ post.ticket.image.url }}" alt="{{post.ticket.title}}">
                     </div>
                     <div class="connexion-button button-submit-right">
-                        <a href="{% url 'edit_review' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
-                        <a href="{% url 'delete_review' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                        <a href="{% url 'edit_review' post.id %}" class="submit-button">Modifier</a>
+                        <a href="{% url 'delete_review' post.id %}" class="submit-button">Supprimer</a>
                     </div>
                 </div>
             {% else %}
@@ -69,9 +69,9 @@
                     <img src="{{ post.image.url }}" alt="{{post.title}}">
                     <div class="connexion-button button-submit-right">
                         {% if not post.has_review %}
-                            <a href="{% url 'edit_ticket' post.id %}"><button type="button" class="submit-button">Modifier</button></a>
+                            <a href="{% url 'edit_ticket' post.id %}" class="submit-button">Modifier</a>
                         {% endif %}
-                        <a href="{% url 'delete_ticket' post.id %}"><button type="button" class="submit-button">Supprimer</button></a>
+                        <a href="{% url 'delete_ticket' post.id %}" class="submit-button">Supprimer</a>
                     </div>
                 </div>
 

@@ -59,6 +59,7 @@ html {
 /* styles communs */
 
 .submit-button {
+    display: inline-block;
     text-decoration: none;
     padding: 10px 30px;
     background-color: var(--button-color);
