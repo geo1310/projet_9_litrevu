@@ -7,8 +7,8 @@
             <h2>Flux</h2>
         </div>
         <div class="connexion-button">
-            <a href="{% url 'create_ticket' %}"><button type="button" class="submit-button">Demander une critique</button></a>
-            <a href="{% url 'create_review' %}"><button type="button" class="submit-button">Créer une critique</button></a>
+            <a href="{% url 'create_ticket' %}" class="submit-button">Demander une critique</a>
+            <a href="{% url 'create_review' %}" class="submit-button">Créer une critique</a>
         </div>
 
         {% if messages %}
@@ -84,7 +84,7 @@
                     <img src="{{ post.image.url }}" alt="{{post.title}}">
                     {% if not post.has_review %}
                         <div class="connexion-button button-submit-right">
-                            <a href="{% url 'create_review_ticket' post.id %}"><button type="button" class="submit-button">Répondre</button></a>
+                            <a href="{% url 'create_review_ticket' post.id %}" class="submit-button">Répondre</a>
                         </div>
                     {% endif %}
                 </div>

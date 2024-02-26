@@ -26,7 +26,7 @@
                 <img src="{% static 'icones/icone-signup.webp' %}" alt="icone signup">
                 <h2>Inscrivez-vous</h2>
             </div>
-            <a href="{% url 'signup' %}"><button type="button" class="submit-button">S'inscrire</button></a>
+            <a href="{% url 'signup' %}" class="submit-button">S'inscrire</a>
         </div>
     </div>
     {% if form.non_field_errors %}
