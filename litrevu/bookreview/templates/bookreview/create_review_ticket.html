@@ -10,8 +10,10 @@
         <div class="ticket-display">
             <div class="title-date">
                 <div class="post-icone">
-                    <img src="{% static 'icones/icone-ticket.webp' %}" alt="icone critique">
-                    <p>{{ ticket.user }} a demandé une critique.</p>
+                    <div class="post-icone-title">
+                        <img src="{% static 'icones/icone-ticket.webp' %}" alt="icone critique">
+                        <p>{{ ticket.user }} a demandé une critique.</p>
+                    </div>
                 </div>
                 <p>{{ ticket.time_created}}</p>
             </div>
