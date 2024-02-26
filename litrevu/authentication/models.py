@@ -1,5 +1,6 @@
-from django.contrib.auth.models import \
-    AbstractUser  # Importation du modèle d'utilisateur abstrait de Django
+from django.contrib.auth.models import (
+    AbstractUser,
+)  # Importation du modèle d'utilisateur abstrait de Django
 
 
 class CustomUser(AbstractUser):

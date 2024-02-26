@@ -1,9 +1,12 @@
-# Import des vues génériques de l'authentification
-import authentication.views
-from django.contrib.auth.views import (LoginView, LogoutView,
-                                       PasswordChangeDoneView,
-                                       PasswordChangeView)
+from django.contrib.auth.views import (  # Import des vues génériques de l'authentification
+    LoginView,
+    LogoutView,
+    PasswordChangeDoneView,
+    PasswordChangeView,
+)
 from django.urls import path
+
+import authentication.views
 
 urlpatterns = [
     path(

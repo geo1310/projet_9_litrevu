@@ -1,12 +1,21 @@
+from PIL import Image
+import os
+from io import BytesIO
+from django.core.files import File
+
 from django.contrib import messages  # Module pour gérer les messages flash
-from django.contrib.auth.decorators import \
-    login_required  # Décorateur pour vérifier si l'utilisateur est connecté
-from django.core.files.storage import \
-    default_storage  # Stockage par défaut pour gérer les fichiers
-from django.db import \
-    IntegrityError  # Importation pour gérer les erreurs d'intégrité de la base de données
-from django.http import \
-    HttpResponseForbidden  # Importation de la réponse HTTP pour les interdictions
+from django.contrib.auth.decorators import (
+    login_required,
+)  # Décorateur pour vérifier si l'utilisateur est connecté
+from django.core.files.storage import (
+    default_storage,
+)  # Stockage par défaut pour gérer les fichiers
+from django.db import (
+    IntegrityError,
+)  # Importation pour gérer les erreurs d'intégrité de la base de données
+from django.http import (
+    HttpResponseForbidden,
+)  # Importation de la réponse HTTP pour les interdictions
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
@@ -16,6 +25,7 @@ from .models import Review, Ticket, UserFollows
 COMMON_IMPORTS = {
     "unauthorized_msg": "Vous n'êtes pas autorisé à effectuer cette action.",
 }
+
 
 # Ticket ---------------------------------------------------------------------
 
@@ -42,8 +52,17 @@ def create_ticket(request):
         ticket_form = TicketForm(request.POST, request.FILES)
 
         if ticket_form.is_valid():
+
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
+
+            # Modifie l'image
+            image_path = ticket.image.path
+            image_buffer_modify, webp_path = compress_image(image_path)
+
+            # Enregistrer l'image compressée dans le champ ImageField du modèle Ticket
+            ticket.image.save(webp_path, File(image_buffer_modify), save=False)
+
             ticket.save()
 
             return redirect("flux")
@@ -80,8 +99,8 @@ def edit_ticket(request, ticket_id):
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
-    # path de l image du ticket existant si elle existe
-    file_path = ticket.image.path if ticket.image else None
+    # path de l image du ticket existant
+    old_file_path = ticket.image.path
 
     edit_form = TicketForm(instance=ticket)
 
@@ -91,12 +110,21 @@ def edit_ticket(request, ticket_id):
 
         if edit_form.is_valid():
 
-            # Vérifie si une nouvelle image a été fournie et supprime l ancienne si elle existe
-            if 'image' in request.FILES and file_path:
-                default_storage.delete(file_path)
+            # Vérifie si une nouvelle image a été fournie, la modifie  et supprime l ancienne si elle existe
+            if "image" in request.FILES:
+
+                # Modifie l'image
+                image_path = ticket.image.path
+                image_buffer_modify, webp_path = compress_image(image_path)
+                # Enregistrer l'image compressée dans le champ ImageField du modèle Ticket
+                ticket.image.save(webp_path, File(image_buffer_modify), save=False)
+
+                # supprime l'ancienne image
+                default_storage.delete(old_file_path)
+                print(old_file_path + "...................................")
 
             ticket.time_created = timezone.now()
-            edit_form.save()
+            ticket.save()
 
             messages.success(
                 request, f"Le Ticket {ticket.title} a été modifié avec succès."
@@ -545,3 +573,47 @@ def flux(request):
     }
 
     return render(request, "bookreview/flux.html", context)
+
+
+# Fonctions diverses ---------------------------------------------------------------------
+
+
+def compress_image(image_path):
+    """
+    Convertit une image en format WEBP et retourne les données de l'image compressée ainsi que le chemin du fichier.
+
+    Args:
+        image_path (str): Chemin de l'image à compresser.
+
+    Returns:
+        tuple: Un tuple contenant les données de l'image compressée (BytesIO) et le chemin du fichier WEBP.
+
+        - image_buffer (BytesIO): Les données de l'image compressée.
+        - webp_file_path (str): Le chemin du fichier WEBP.
+    """
+
+    # parametres de modifications des images
+    size_img = (500, 500)
+    quality_img = 70
+    format_img = "WEBP"
+
+    try:
+        # Créer le chemin de fichier avec l'extension .webp
+        webp_path = os.path.splitext(image_path)[0] + ".webp"
+
+        # Ouvrir l'image avec Pillow
+        with Image.open(image_path) as img:
+
+            # Redimensionnement en gardant les proportions
+            img.thumbnail(size_img)
+
+            # Enregistrer l'image compressée en mémoire tampon
+            image_buffer = BytesIO()
+            img.save(image_buffer, format=format_img, quality=quality_img)
+            # déplace le pointeur de lecture au début deu tampon
+            image_buffer.seek(0)
+
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de la compression de l'image : {e}")
+
+    return image_buffer, webp_path
