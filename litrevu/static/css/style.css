@@ -430,7 +430,7 @@ select {
     border-radius: 10px;
 }
 
-.post-ticket img, .post-review img, .post-ticket-review img, .ticket-display img, .form-field-ticket img{
+.post-ticket img, .post-review img, .post-ticket-review img, .ticket-display img, .form-field-ticket img {
     width: 250px;
 }
 
@@ -468,6 +468,7 @@ select {
 }
 
 .post-icone {
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,5 +1,4 @@
 from PIL import Image
-import os
 from io import BytesIO
 from django.core.files import File
 
@@ -50,6 +49,7 @@ def create_ticket(request):
     if request.method == "POST":
 
         ticket_form = TicketForm(request.POST, request.FILES)
+        image_file = request.FILES["image"]
 
         if ticket_form.is_valid():
 
@@ -57,11 +57,18 @@ def create_ticket(request):
             ticket.user = request.user
 
             # Modifie l'image
-            image_path = ticket.image.path
-            image_buffer_modify, webp_path = compress_image(image_path)
 
-            # Enregistrer l'image compressée dans le champ ImageField du modèle Ticket
-            ticket.image.save(webp_path, File(image_buffer_modify), save=False)
+            try:
+                image_buffer_modify, webp_path = compress_image(image_file)
+                # Enregistrer l'image compressée en buffer dans le champ ImageField du modèle Ticket
+                ticket.image.save(webp_path, File(image_buffer_modify), save=False)
+                image_buffer_modify.close()
+
+            except Exception:
+                messages.error(
+                    request,
+                    "Une erreur s'est produite lors de la compression de l'image.",
+                )
 
             ticket.save()
 
@@ -99,42 +106,47 @@ def edit_ticket(request, ticket_id):
 
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
-    # path de l image du ticket existant
-    old_file_path = ticket.image.path
+    # image d'origine
+    old_image_path = ticket.image.path
 
-    edit_form = TicketForm(instance=ticket)
+    edit_form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
 
-    if request.method == "POST":
+    if request.method == "POST" and edit_form.is_valid():
 
-        edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
+        # Vérifie si une nouvelle image a été fournie, la modifie  et supprime l ancienne si elle existe
+        if "image" in request.FILES:
 
-        if edit_form.is_valid():
+            image_file = request.FILES["image"]
 
-            # Vérifie si une nouvelle image a été fournie, la modifie  et supprime l ancienne si elle existe
-            if "image" in request.FILES:
+            # Modifie l'image
+            try:
+                image_buffer_modify, webp_path = compress_image(image_file)
 
-                # Modifie l'image
-                image_path = ticket.image.path
-                image_buffer_modify, webp_path = compress_image(image_path)
-                # Enregistrer l'image compressée dans le champ ImageField du modèle Ticket
+                # Enregistre l'image compressée en tampon dans le champ ImageField du modèle Ticket
                 ticket.image.save(webp_path, File(image_buffer_modify), save=False)
+                image_buffer_modify.close()
 
-                # supprime l'ancienne image
-                default_storage.delete(old_file_path)
-                print(old_file_path + "...................................")
+            except Exception:
+                messages.error(
+                    request,
+                    "Une erreur s'est produite lors de la compression de l'image.",
+                )
 
-            ticket.time_created = timezone.now()
-            ticket.save()
+            # supprime l'ancienne image
+            default_storage.delete(old_image_path)
 
-            messages.success(
-                request, f"Le Ticket {ticket.title} a été modifié avec succès."
-            )
-            return redirect("posts")
-        else:
-            # Afficher les erreurs de validation du formulaire
-            for field, errors in edit_form.errors.items():
-                for error in errors:
-                    messages.error(request, f"Erreur dans le champ '{field}': {error}")
+        ticket.time_created = timezone.now()
+        ticket.save()
+
+        messages.success(
+            request, f"Le Ticket {ticket.title} a été modifié avec succès."
+        )
+        return redirect("posts")
+    else:
+        # Afficher les erreurs de validation du formulaire
+        for field, errors in edit_form.errors.items():
+            for error in errors:
+                messages.error(request, f"Erreur dans le champ '{field}': {error}")
 
     context = {
         "edit_form": edit_form,
@@ -578,12 +590,12 @@ def flux(request):
 # Fonctions diverses ---------------------------------------------------------------------
 
 
-def compress_image(image_path):
+def compress_image(image_file):
     """
     Convertit une image en format WEBP et retourne les données de l'image compressée ainsi que le chemin du fichier.
 
     Args:
-        image_path (str): Chemin de l'image à compresser.
+        image_file (UploadedFile): Objet de fichier de l'image à compresser.
 
     Returns:
         tuple: Un tuple contenant les données de l'image compressée (BytesIO) et le chemin du fichier WEBP.
@@ -598,11 +610,8 @@ def compress_image(image_path):
     format_img = "WEBP"
 
     try:
-        # Créer le chemin de fichier avec l'extension .webp
-        webp_path = os.path.splitext(image_path)[0] + ".webp"
-
         # Ouvrir l'image avec Pillow
-        with Image.open(image_path) as img:
+        with Image.open(image_file) as img:
 
             # Redimensionnement en gardant les proportions
             img.thumbnail(size_img)
@@ -613,7 +622,13 @@ def compress_image(image_path):
             # déplace le pointeur de lecture au début deu tampon
             image_buffer.seek(0)
 
-    except Exception as e:
-        print(f"Une erreur s'est produite lors de la compression de l'image : {e}")
+        # Créer le chemin de fichier avec l'extension .webp
+        webp_file_path = f"{image_file.name.split('.')[0]}.webp"
 
-    return image_buffer, webp_path
+    except Exception as e:
+        print(20 * "-")
+        print(f"Une erreur s'est produite lors de la compression de l'image : {e}")
+        print(20 * "-")
+        return None, None
+
+    return image_buffer, webp_file_path
