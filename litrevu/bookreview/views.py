@@ -46,6 +46,7 @@ def create_ticket(request):
     """
 
     ticket_form = TicketForm()
+
     if request.method == "POST":
 
         ticket_form = TicketForm(request.POST, request.FILES)
@@ -592,7 +593,10 @@ def flux(request):
 
 def compress_image(image_file):
     """
-    Convertit une image en format WEBP et retourne les données de l'image compressée ainsi que le chemin du fichier.
+    Compresse une image en format WEBP, modifie sa teille et retourne les données
+    de l'image compressée ainsi que le chemin du fichier.
+    La qualité de compression par défaut : 70%
+    La taille par défaut : 500 x 500
 
     Args:
         image_file (UploadedFile): Objet de fichier de l'image à compresser.
